@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
 document.getElementById('return').addEventListener('click',menu);
 document.getElementById('load').addEventListener('click',decryptMsg);
 document.getElementById('secret').addEventListener('keyup',verify);
