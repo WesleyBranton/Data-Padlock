@@ -11,6 +11,7 @@ document.getElementById('continue').addEventListener('click',function(){encryptM
 document.getElementById('return').addEventListener('click',function(){nav('main')});
 document.getElementById('cancel').addEventListener('click',cancel);
 document.getElementById('share-new').addEventListener('click',reset);
+load();
 
 // Save encrypted message to clipboard
 function clipboard() {
@@ -164,4 +165,10 @@ function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
 	document.getElementById('share-msg').value = '';
+
+// Handle page load
+async function load() {
+    document.getElementById('loading-screen').className = 'hide';
+	document.getElementById('user-share').className = 'hide';
+    document.getElementById('user-input').className = '';
 }
