@@ -3,8 +3,8 @@ document.getElementById('secret').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('focus',showpass);
 document.getElementById('code').addEventListener('blur',hidepass);
-document.getElementById('share-url').addEventListener('focus',clipboard);
-document.getElementById('share-url').addEventListener('click',clipboard);
+document.getElementById('share-msg').addEventListener('focus',clipboard);
+document.getElementById('share-msg').addEventListener('click',clipboard);
 document.getElementById('share-button').addEventListener('click',clipboard);
 document.getElementById('copy').addEventListener('click',function(){encryptMsg(false)});
 document.getElementById('continue').addEventListener('click',function(){encryptMsg(true)});
@@ -14,7 +14,7 @@ document.getElementById('share-new').addEventListener('click',reset);
 
 // Save encrypted message to clipboard
 function clipboard() {
-	document.getElementById('share-url').select();
+	document.getElementById('share-msg').select();
 	document.execCommand('copy');
 }
 
@@ -58,9 +58,8 @@ function encrypt(msg,key) {
 
 // Output the encrypted password
 function saveMsg(msg) {
-	var url = msg;
-	var share = document.getElementById("share-url");
-	share.value = url;
+	var share = document.getElementById("share-msg");
+	share.value = msg;
 	document.getElementById('loading-screen').className = 'hide';
 	document.getElementById('user-share').className = '';
 	var message = document.getElementById("secret");
@@ -162,5 +161,5 @@ function hidepass() {
 function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
-	document.getElementById('share-url').value = '';
+	document.getElementById('share-msg').value = '';
 }
