@@ -1,33 +1,134 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+:root {
+	--blue-reg:#3993FD;
+	--blue-alt:#1C85FD;
+	--purple-reg:#C666FD;
+	--purple-alt:#BD4FFC;
+	--grey-reg:#F2F2F2;
+}
 
 body {
 	font-family:sans-serif;
+	padding:10px;
+	box-sizing:border-box;
+	margin:0px;
+}
+
+#user-input img {
+	max-width:100%;
+}
+
+ul {
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+
+body.menu #send {
+	margin-top:10vh;
+}
+
+#icon {
+	background-color:#44BC6B;
+	width:30%;
+	margin:auto;
+	border-radius:100%;
+	padding:25px;
+	box-sizing:border-box;
+	background-image: linear-gradient(to bottom right, #44BC6B, #1D7A47);
+	box-shadow:0 2px 4px 2px hsla(0,0%,0%,0.08);
+}
+
+#icon img {
+	width:100%;
+}
+
+#user-share h2 {
+	color:#44BC6B;
+	text-shadow:2px 4px 2px hsla(0,0%,0%,0.08);
+	text-align:center;
+}
+
+.loaded label, .loaded textarea, .unloaded p {
+	display:none;
+}
+
+.nowrap {
+	white-space:nowrap;
+}
+
+#container {
+	width:100%;
+	max-width:500px;
+	min-width:200px;
+	margin:auto;
+}
+
+.hide {
+	display:none !important;
+}
+
+header img {
+	width:100%;
+	max-width:500px;
+	min-width:200px;
+	text-align:center;
+	margin-bottom:20px;
+	margin-top:20px;
+}
+
+.nocolor {
+	background:none;
+	box-shadow:none;
+	color:#C2C2C2;
+}
+
+.nodisable:disabled {
+	background-color:white;
+	color:black;
 }
 
 label {
 	font-size:14pt;
 	font-weight:bold;
+	display:block;
+	margin:10px 0px;
+}
+
+div.bar {
+	display:flex;
+	width:100%;
+}
+
+div.bar .main-item {
+	flex:100;
+}
+
+div.bar .second-item {
+	flex:1;
+	margin-left:5px;
 }
 
 button {
 	border:none;
-	padding:10px;
-	font-size:16pt;
-	border-radius:5px;
+	padding:10px 30px;
+	font-size:14pt;
+	font-weight:bold;
+	border-radius:100px;
 	text-transform:uppercase;
 	cursor:pointer;
 	transition:ease all 0.5s;
+	box-shadow:0 2px 4px 2px hsla(0,0%,0%,0.08);
 }
 
-button:enabled:hover {
-	filter:brightness(120%);
+button:enabled:hover:not(.nocolor) {
+	filter:brightness(80%);
 }
 
 button:disabled {
-	background-color:#C2C2C2 !important;
-	cursor:not-allowed !important;	
+	background-color:#BFBFBF !important;
+	background-image: linear-gradient(#BFBFBF,#B3B3B3) !important;
+	color:var(--grey-reg) !important;
+	cursor:not-allowed;
 }
 
 textarea, input {
@@ -45,21 +146,42 @@ textarea {
 	height:200px;
 }
 
-textarea, #code {
-	border:1px solid black;
+textarea, input, #strengthbar, #strengthbar div {
+	border:1px solid hsla(0,0%,0%,0.08);
+	box-shadow:inset 0 2px 4px 0 hsla(0,0%,0%,0.08);
 }
 
-#copy, #load {
+button.blue {
 	color:white;
-	background-color:#0099FF;
+	background-color:var(--blue-reg);
+	background-image: linear-gradient(var(--blue-reg),var(--blue-alt));
 }
 
-#return {
+button.purple {
+	color:white;
+	background-color:var(--purple-reg);
+	background-image: linear-gradient(var(--purple-reg),var(--purple-alt));
+}
+
+button.red {
 	color:white;
 	background-color:#E72918;
+	background-image: linear-gradient(#E72918,#D02516);
 }
 
-#send, #receive {
+body.blue {
+	border-top:5px solid var(--blue-reg);
+}
+
+body.purple {
+	border-top:5px solid var(--purple-reg);
+}
+
+body.menu {
+	border-top:5px solid white;
+}
+
+.menu-btn {
 	width:100%;
 	min-width:300px;
 	padding:30px 10px;
@@ -68,16 +190,114 @@ textarea, #code {
 	margin-bottom:5px;
 }
 
-#send {
-	background-color:#0099FF;
-}
-
-#receive {
-	background-color:#CC66FF;
-}
-
-#success {
+#strengthbar {
+	height:10px;
 	width:100%;
-	color:#36B056;
-	text-align:center;
+	display:block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius:100px;
+	overflow: hidden;
+	position:relative;
+}
+
+#strengthbar div {
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:10px;
+	transition:0.5s ease all;
+}
+
+#strengthbar.none div {
+	background-color:var(--grey-reg);
+	width:0%;
+	left:-5px;
+}
+
+#strengthbar.bad div {
+	background-color:#E72918;
+	width:25%;
+}
+
+#strengthbar.weak div {
+	background-color:#FFCC66;
+	width:50%;
+}
+
+#strengthbar.fair div {
+	background-color:#99FF66;
+	width:75%;
+}
+
+#strengthbar.good div {
+	background-color:#009933;
+	width:100%;
+}
+
+#password-requirements p {
+	margin:0px;
+	padding:5px 15px;
+	box-sizing:border-box;
+	transition:ease all 0.5s;
+}
+
+#password-requirements .fail {
+	background-color:#FAD4D1;
+	border-left:5px solid #E72918;
+}
+
+#password-requirements .pass {
+	background-color:#DAF1E2;
+	border-left:5px solid #44BC6B;
+}
+
+#password-requirements {
+	overflow:hidden;
+	transition:ease max-height 0.5s;
+	max-height:0px;
+}
+
+#warning {
+	border-left:5px solid #E72918;
+	background-color:#FAD4D1;
+	padding:10px 15px;
+	color:#E72918;
+	margin:10px;
+}
+
+#note {
+	border-left:5px solid #FF9933;
+	background-color:#FFE6CC;
+	padding:10px 15px;
+	color:#FF9933;
+	margin:10px;
+}
+
+#note a {
+	color:#FF9933;
+}
+
+#loader {
+	border: 10px solid var(--grey-reg);
+	border-top: 10px solid var(--blue-reg);
+	border-radius:50%;
+	width: 80px;
+	height: 80px;
+	animation: spin 0.4s linear infinite;
+	margin:auto;
+	margin-top:20vh;
+}
+
+#loader.blue {
+	border-top: 10px solid var(--blue-reg);
+}
+
+#loader.purple {
+	border-top: 10px solid var(--purple-reg);
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
