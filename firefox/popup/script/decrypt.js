@@ -50,7 +50,7 @@ function decrypt(message,key) {
 	var version = msg.slice(msg.indexOf('ver') + 3);
 	msg = msg.slice(0,msg.indexOf('ver'));
 	if (version != '2' || message.indexOf('VER') < 0) {
-		if (message.indexOf('VER') < 0 {
+		if (message.indexOf('VER') < 0) {
 			version = '1'
 		}
 		wrongVersion(version);
