@@ -24,5 +24,7 @@
 	
 	"background": {
 		"scripts": ["background.js"]
-	}
+	},
+	
+	"permissions": ["webRequest","webRequestBlocking","*://*.securesend.local/*","*://securesend.local/*"]
 }
