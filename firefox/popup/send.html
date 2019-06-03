@@ -28,8 +28,8 @@
 					<p id="password-requirements-symbol" class="fail">Contains symbols</p>
 				</div><br>
 				<div id="main-bar" class="bar">
-					<button id="copy" class="main-item blue" disabled tabindex="3" onclick="encryptMsg(false)">Secure Message</button>
-					<button id="return" class="second-item red" tabindex="4" onclick="menu()">&times;</button>
+					<button id="copy" class="main-item blue" disabled tabindex="3">Secure Message</button>
+					<button id="return" class="second-item red" tabindex="4">&times;</button>
 				</div>
 				<div id="password-bar" class="hide">
 					<div id="warning">
@@ -38,8 +38,8 @@
 						Would you like to proceed anyway?
 					</div>
 					<div class="bar">
-						<button id="cancel" class="main-item red" tabindex="-1" onclick="cancel()">Cancel</button>
-						<button id="continue" class="second-item nocolor nowrap" tabindex="-1" onclick="encryptMsg(true)">Proceed</button>
+						<button id="cancel" class="main-item red" tabindex="-1">Cancel</button>
+						<button id="continue" class="second-item nocolor nowrap" tabindex="-1">Proceed</button>
 					</div>
 				</div>
 			</section>
@@ -50,10 +50,10 @@
 				<h2>Your message is now ready to share!</h2>
 				<p>Send this link to the intended recipient and they can use the set password to view the message.</p>
 				<label for="share-url">Link: </label>
-				<input type="text" id="share-url" class="main-item" readonly tabindex="-1" onclick="clipboard()"></input><br><br>
+				<input type="text" id="share-url" class="main-item" readonly tabindex="-1"></input><br><br>
 				<div class="bar">
-					<button id="share-button" class="main-item blue" tabindex="-1" onclick="clipboard()">Copy Link</button>
-					<button id="share-new" class="second-item red nowrap" tabindex="-1" onclick="reset()">&#8635; New</button>
+					<button id="share-button" class="main-item blue" tabindex="-1">Copy Link</button>
+					<button id="share-new" class="second-item red nowrap" tabindex="-1">&#8635; New</button>
 				</div>
 				<div id="warning">
 					<b>&#x26A0; WARNING:</b><br>
@@ -69,6 +69,7 @@
 		<script src="script/libs/scrypt.js" type="text/javascript"></script>
 		<script src="script/libs/generate.js" type="text/javascript"></script>
 		<script src="script/libs/index.js" type="text/javascript"></script>
+		<script src="script/navigation.js"></script>
 		<script src="script/encrypt.js"></script>
 	</body>
 </html>

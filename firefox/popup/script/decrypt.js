@@ -1,6 +1,10 @@
 verify();
 document.getElementById('secret').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('keyup',verify);
+document.getElementById('load').addEventListener('click',decryptMsg);
+document.getElementById('return').addEventListener('click',function(){open('main')});
+document.getElementById('share-new').addEventListener('click',function(){open('main')});
+document.getElementById('read-new').addEventListener('click',function(){open('read')});
 load();
 
 // Page loaded
@@ -78,23 +82,4 @@ function verify() {
 	} else {
 		document.getElementById('load').disabled = true;
 	}
-}
-
-// Return to main menu
-function menu() {
-	showLoading();
-	window.location.href = '/main.html';
-}
-
-// Reload page
-function another() {
-	showLoading();
-	window.location.href = '/read.html';
-}
-
-// Show the loading bar
-function showLoading() {
-	document.getElementById('user-share').className = 'hide';
-	document.getElementById('user-input').className = 'hide';
-	document.getElementById('loading-screen').className = '';
 }

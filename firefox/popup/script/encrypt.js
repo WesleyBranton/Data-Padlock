@@ -4,6 +4,13 @@ document.getElementById('code').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('focus',showpass);
 document.getElementById('code').addEventListener('blur',hidepass);
 document.getElementById('share-url').addEventListener('focus',clipboard);
+document.getElementById('share-url').addEventListener('click',clipboard);
+document.getElementById('share-button').addEventListener('click',clipboard);
+document.getElementById('copy').addEventListener('click',function(){encryptMsg(false)});
+document.getElementById('continue').addEventListener('click',function(){encryptMsg(true)});
+document.getElementById('return').addEventListener('click',function(){open('main')});
+document.getElementById('cancel').addEventListener('click',cancel);
+document.getElementById('share-new').addEventListener('click',reset);
 
 // Save encrypted message to clipboard
 function clipboard() {
@@ -146,7 +153,6 @@ function showpass() {
 	document.getElementById('password-requirements').style.maxHeight = document.getElementById('password-requirements').scrollHeight + 'px';
 }
 
-
 // Hide the password strength dropdown
 function hidepass() {
 	document.getElementById('password-requirements').style.maxHeight = '0px';
@@ -157,17 +163,4 @@ function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
 	document.getElementById('share-url').value = '';
-}
-
-// Return to main menu
-function menu() {
-	showLoading();
-	window.location.href = '/main.html';
-}
-
-// Show the loading bar
-function showLoading() {
-	document.getElementById('user-share').className = 'hide';
-	document.getElementById('user-input').className = 'hide';
-	document.getElementById('loading-screen').className = '';
 }
