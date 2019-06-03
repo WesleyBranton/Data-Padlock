@@ -66,15 +66,23 @@ function decrypt(message,key) {
 
 // Display the decrypted message
 function saveMsg(msg) {
-	var read = document.getElementById("unlocked-message");
-	read.value = msg;
-	document.getElementById('loading-screen').className = 'hide';
-	document.getElementById('user-share').className = '';
-	var message = document.getElementById("secret");
+	var wrongPassword = document.getElementById('wrongpassword');
+	if (msg.slice(msg.length - 7) == 'secsend') {
+		msg = msg.slice(0, msg.length - 7);
+		var read = document.getElementById("unlocked-message");
+		read.value = msg;
+		document.getElementById('user-share').className = '';
+		var message = document.getElementById("secret");
+		message.value = '';
+		wrongPassword.style.display = 'none';
+	} else {
+		wrongPassword.style.display = 'block';
+		document.getElementById('user-input').className = '';
+	}
 	var password = document.getElementById("code");
-	message.value = '';
 	password.value = '';
 	verify();
+	document.getElementById('loading-screen').className = 'hide';
 }
 
 // Wrong version error message

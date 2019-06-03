@@ -28,10 +28,11 @@ function encryptMsg(bypass) {
 		document.getElementById('password-bar').className = '';
 	} else {
 		showLoading();
-		var message = document.getElementById("secret");
-		var password = document.getElementById("code");
+		var message = document.getElementById("secret").value;
+		message += 'secsend';
+		var password = document.getElementById("code").value;
 		cancel();
-		start(message.value, password.value, 1);
+		start(message, password, 1);
 	}
 }
 
