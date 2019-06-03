@@ -1,1 +1,1 @@
-document.getElementById('return').addEventListener('click',function(){open('main')});
+document.getElementById('return').addEventListener('click',function(){nav('main')});

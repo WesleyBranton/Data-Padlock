@@ -8,7 +8,7 @@ document.getElementById('share-msg').addEventListener('click',clipboard);
 document.getElementById('share-button').addEventListener('click',clipboard);
 document.getElementById('copy').addEventListener('click',function(){encryptMsg(false)});
 document.getElementById('continue').addEventListener('click',function(){encryptMsg(true)});
-document.getElementById('return').addEventListener('click',function(){open('main')});
+document.getElementById('return').addEventListener('click',function(){nav('main')});
 document.getElementById('cancel').addEventListener('click',cancel);
 document.getElementById('share-new').addEventListener('click',reset);
 

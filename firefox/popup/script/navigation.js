@@ -1,5 +1,5 @@
 // Load page
-function open(page) {
+function nav(page) {
 	showLoading();
 	window.location.href = './' + page + '.html';
 }

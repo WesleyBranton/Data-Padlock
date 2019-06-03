@@ -2,9 +2,9 @@ verify();
 document.getElementById('secret').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('keyup',verify);
 document.getElementById('load').addEventListener('click',decryptMsg);
-document.getElementById('return').addEventListener('click',function(){open('main')});
-document.getElementById('share-new').addEventListener('click',function(){open('main')});
-document.getElementById('read-new').addEventListener('click',function(){open('read')});
+document.getElementById('return').addEventListener('click',function(){nav('main')});
+document.getElementById('share-new').addEventListener('click',function(){nav('main')});
+document.getElementById('read-new').addEventListener('click',function(){nav('read')});
 load();
 
 // Page loaded
