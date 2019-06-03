@@ -3,7 +3,9 @@ document.getElementById('secret').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('keyup',verify);
 load();
 
+// Page loaded
 function load() {
+	// Try to load message from URL parameters
 	var loadMsg = getParameterByName('m');
 	if (loadMsg != null && loadMsg.length > 16) {
 		document.getElementById('secret').value = loadMsg;
@@ -12,10 +14,13 @@ function load() {
 		document.getElementById('secret').value = '';
 		document.getElementById('message-box-container').className = 'unloaded';
 	}
+	
 	document.getElementById('loading-screen').className = 'hide';
 	document.getElementById('user-input').className = '';
 }
 
+
+// Check URL parameters
 function getParameterByName(name, url) {
 	if (!url) url = window.location.href;
 	name = name.replace(/[\[\]]/g, "\\$&");
@@ -26,6 +31,7 @@ function getParameterByName(name, url) {
 	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+// Start message decryption
 function decryptMsg() {
 	showLoading();
 	var message = document.getElementById("secret");
@@ -33,6 +39,7 @@ function decryptMsg() {
 	start(message.value, password.value, 0);
 }
 
+// Decrypt message.
 function decrypt(message,key) {
 	var message = message.toLowerCase();
 	var iv = aesjs.utils.hex.toBytes(message.substr(0,16*2));
@@ -43,10 +50,11 @@ function decrypt(message,key) {
 	saveMsg(decryptedText.trim());
 }
 
+// Display the decrypted message
 function saveMsg(msg) {
 	var read = document.getElementById("unlocked-message");
 	read.value = msg;
-		document.getElementById('loading-screen').className = 'hide';
+	document.getElementById('loading-screen').className = 'hide';
 	document.getElementById('user-share').className = '';
 	var message = document.getElementById("secret");
 	var password = document.getElementById("code");
@@ -55,13 +63,16 @@ function saveMsg(msg) {
 	verify();
 }
 
+// Reset fields
 function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
 	document.getElementById('unlocked-message').value = '';
 }
 
+// Verify user information
 function verify() {
+	// Check that password and message fields are entered
 	if (document.getElementById('secret').value.length > 0 && document.getElementById('code').value.length > 0) {
 		document.getElementById('load').disabled = false;
 	} else {
@@ -69,16 +80,19 @@ function verify() {
 	}
 }
 
+// Return to main menu
 function menu() {
 	showLoading();
-	window.location.href = '/';
+	window.location.href = '/main.html';
 }
 
+// Reload page
 function another() {
 	showLoading();
-	window.location.href = '/read';
+	window.location.href = '/read.html';
 }
 
+// Show the loading bar
 function showLoading() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = 'hide';
