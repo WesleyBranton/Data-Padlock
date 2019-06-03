@@ -87,7 +87,8 @@ function saveMsg(msg) {
 
 // Wrong version error message
 function wrongVersion(version) {
-	
+	showLoading();
+	window.location.href = './version.html?v=' + version;
 }
 
 // Reset fields

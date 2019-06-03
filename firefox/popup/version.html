@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Incorrect Version | Secure Send</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="stylesheet/theme.css"/>
+		<link rel="shortcut icon" href="../icons/icon-96.png"/>
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<img src="image/logo.jpg"/>
+			</header>
+			<section id="user-input">
+				<center>
+                    <h1>Wrong Version Detected!</h1>
+                    <p>The message you are attempting to read was created using <b>Version <span id="versionnumber"></span></b> of the Secure Send extension and, therefore, cannot be opened using this version.</p>
+                    <p>To view this message, you will need to download the correct version of Secure Send.</p>
+				</center>
+				<div class="note">
+					<b>&#x26A0; NOTE:</b><br>
+					Older versions of Secure Send should only be used to read old messages. New messages should never be created using an old version.
+				</div>
+				<div class="bar">
+					<button id="view" class="main-item blue">Download Old Version</button>
+					<button id="cancel" class="second-item nocolor nowrap">Cancel</button>
+				</div>
+			</section>
+			<section id="loading-screen" class="hide">
+				<div id="loader" class="blue"></div>
+			</section>
+		</div>
+		<script src="script/navigation.js"></script>
+		<script src="script/version.js"></script>
+	</body>
+</html>
