@@ -301,3 +301,31 @@ body.menu {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
 }
+
+#pkeyad {
+    position:relative;
+    background-color:#663399;
+    color:white;
+    padding:10px;
+    border-radius:5px;
+    margin-top:5px;
+}
+
+#pkeyclose {
+    position:absolute;
+    top:5px;
+    right:5px;
+    font-size:80%;
+    cursor:pointer;
+}
+
+#pkeyclose:hover {
+    text-decoration:underline;
+}
+
+#pkeyclick {
+    color:gold;
+    font-weight:bold;
+    text-decoration:underline;
+    cursor:pointer;
+}

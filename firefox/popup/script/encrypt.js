@@ -165,10 +165,27 @@ function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
 	document.getElementById('share-msg').value = '';
+}
 
 // Handle page load
 async function load() {
+    let data = await browser.storage.local.get();
+    pkeyload(data);
     document.getElementById('loading-screen').className = 'hide';
 	document.getElementById('user-share').className = 'hide';
     document.getElementById('user-input').className = '';
+}
+
+// P-Key Handler
+function pkeyload(info) {
+    if (!info.hidepk) {
+        document.getElementById('pkeyclose').addEventListener('click',pkeyclose);
+        document.getElementById('pkeyclick').addEventListener('click',function(){window.open('https://addons.mozilla.org/firefox/addon/password-generator/','_blank')});
+        document.getElementById('pkeyad').className = '';
+    }
+}
+
+function pkeyclose() {
+    browser.storage.local.set({hidepk: true});
+    document.getElementById('pkeyad').className = 'hide';
 }
