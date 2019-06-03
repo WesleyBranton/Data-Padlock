@@ -9,7 +9,9 @@ function openPage(e) {
 	if (page == 'read') {
 		document.getElementById('loader').className = 'purple';
 	}
-	document.getElementById('menu-buttons').className = 'hide';
+	if (document.getElementById('menu-buttons')) {
+		document.getElementById('menu-buttons').className = 'hide';
+	}
 	document.getElementById('loading-screen').className = '';
 	window.location = page + ".html";
 }
