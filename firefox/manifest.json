@@ -3,6 +3,12 @@
 	"name": "Secure Send",
 	"version": "2.0",
 	"description": "Secure your messages using encryption!",
+	"author": "Wesley Branton",
+	
+	"developer": {
+		"name": "Wesley Branton",
+		"url": "http://addons.wesleybranton.com"
+	},
 
 	"icons": {
 		"32": "icons/icon-32.png",
