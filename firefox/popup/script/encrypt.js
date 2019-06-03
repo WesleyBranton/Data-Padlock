@@ -58,7 +58,7 @@ function encrypt(msg,key) {
 
 // Output the encrypted password
 function saveMsg(msg) {
-	var url = 'http://securesend.clotheslinedigital.com/read?m=' + msg;
+	var url = msg;
 	var share = document.getElementById("share-url");
 	share.value = url;
 	document.getElementById('loading-screen').className = 'hide';
