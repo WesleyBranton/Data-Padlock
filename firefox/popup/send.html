@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Send Message | Secure Send</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="stylesheet/theme.css"/>
+		<link rel="shortcut icon" href="image/favicon.png"/>
+	</head>
+	<body class="blue">
+		<div id="container">
+			<header>
+				<img src="image/logo.jpg"/>
+			</header>
+			<section id="user-input">
+				<label for="message">Message: </label>
+				<textarea id="secret" tabindex="1" class="nodisable"></textarea>
+				<label for="code">Password: </label>
+				<input type="password" id="code" name="code" tabindex="2" class="nodisable"/>
+				<div id="strengthbar" class="none">
+					<div></div>
+				</div>
+				<div id="password-requirements" class="minimize">
+					<p id="password-requirements-length" class="fail">At least 8 characters long</p>
+					<p id="password-requirements-lowercase" class="fail">Contains lowercase letters</p>
+					<p id="password-requirements-uppercase" class="fail">Contains uppercase letters</p>
+					<p id="password-requirements-number" class="fail">Contains numbers</p>
+					<p id="password-requirements-symbol" class="fail">Contains symbols</p>
+				</div><br>
+				<div id="main-bar" class="bar">
+					<button id="copy" class="main-item blue" disabled tabindex="3" onclick="encryptMsg(false)">Secure Message</button>
+					<button id="return" class="second-item red" tabindex="4" onclick="menu()">&times;</button>
+				</div>
+				<div id="password-bar" class="hide">
+					<div id="warning">
+						<b>&#x26A0; WARNING:</b><br>
+						Weak passwords are easier to guess and could make your message vulnerable to attackers. We recommend securing your message with a stronger password.<br><br>
+						Would you like to proceed anyway?
+					</div>
+					<div class="bar">
+						<button id="cancel" class="main-item red" tabindex="-1" onclick="cancel()">Cancel</button>
+						<button id="continue" class="second-item nocolor nowrap" tabindex="-1" onclick="encryptMsg(true)">Proceed</button>
+					</div>
+				</div>
+			</section>
+			<section id="user-share" class="hide">
+				<div id="icon">
+					<img src="image/locked.png"/>
+				</div>
+				<h2>Your message is now ready to share!</h2>
+				<p>Send this link to the intended recipient and they can use the set password to view the message.</p>
+				<label for="share-url">Link: </label>
+				<input type="text" id="share-url" class="main-item" readonly tabindex="-1" onclick="clipboard()"></input><br><br>
+				<div class="bar">
+					<button id="share-button" class="main-item blue" tabindex="-1" onclick="clipboard()">Copy Link</button>
+					<button id="share-new" class="second-item red nowrap" tabindex="-1" onclick="reset()">&#8635; New</button>
+				</div>
+				<div id="warning">
+					<b>&#x26A0; WARNING:</b><br>
+					You cannot view this link again, once you navigate away from this page.
+				</div>
+			</section>
+			<section id="loading-screen" class="hide">
+				<div id="loader" class="blue"></div>
+			</section>
+		</div>
+		<script src="script/libs/buffer.js" type="text/javascript"></script>
+		<script src="script/libs/unorm.js" type="text/javascript"></script>
+		<script src="script/libs/scrypt.js" type="text/javascript"></script>
+		<script src="script/libs/generate.js" type="text/javascript"></script>
+		<script src="script/libs/index.js" type="text/javascript"></script>
+		<script src="script/encrypt.js"></script>
+	</body>
+</html>
