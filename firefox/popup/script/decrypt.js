@@ -43,15 +43,25 @@ function decryptMsg() {
 	start(message.value, password.value, 0);
 }
 
-// Decrypt message.
+// Decrypt message
 function decrypt(message,key) {
-	var message = message.toLowerCase();
-	var iv = aesjs.utils.hex.toBytes(message.substr(0,16*2));
-	var encryptedBytes = aesjs.utils.hex.toBytes(message.substr(16*2));
-	var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
-	var decryptedBytes = aesCbc.decrypt(encryptedBytes);
-	var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-	saveMsg(decryptedText.trim());
+	var msg = message.toLowerCase();
+	msg = msg.trim();
+	var version = msg.slice(msg.indexOf('ver') + 3);
+	msg = msg.slice(0,msg.indexOf('ver'));
+	if (version != '2' || message.indexOf('VER') < 0) {
+		if (message.indexOf('VER') < 0 {
+			version = '1'
+		}
+		wrongVersion(version);
+	} else {
+		var iv = aesjs.utils.hex.toBytes(msg.substr(0,16*2));
+		var encryptedBytes = aesjs.utils.hex.toBytes(msg.substr(16*2));
+		var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+		var decryptedBytes = aesCbc.decrypt(encryptedBytes);
+		var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+		saveMsg(decryptedText.trim());
+	}
 }
 
 // Display the decrypted message
@@ -65,6 +75,11 @@ function saveMsg(msg) {
 	message.value = '';
 	password.value = '';
 	verify();
+}
+
+// Wrong version error message
+function wrongVersion(version) {
+	
 }
 
 // Reset fields

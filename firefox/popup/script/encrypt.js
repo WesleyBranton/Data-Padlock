@@ -58,6 +58,7 @@ function encrypt(msg,key) {
 
 // Output the encrypted password
 function saveMsg(msg) {
+	msg += 'VER2';
 	var share = document.getElementById("share-msg");
 	share.value = msg;
 	document.getElementById('loading-screen').className = 'hide';
