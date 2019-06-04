@@ -266,6 +266,14 @@ body.menu {
 	margin:10px;
 }
 
+#donationpopup {
+	border-left:5px solid #1C85FD;
+	background-color:#b3d6fe;
+	padding:10px 15px;
+	color:#1C85FD;
+	margin:10px;
+}
+
 .note {
 	border-left:5px solid #FF9933;
 	background-color:#FFE6CC;

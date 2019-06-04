@@ -165,12 +165,18 @@ function reset() {
 	document.getElementById('user-share').className = 'hide';
 	document.getElementById('user-input').className = '';
 	document.getElementById('share-msg').value = '';
+	location.reload();
 }
 
 // Handle page load
 async function load() {
     let data = await browser.storage.local.get();
     pkeyload(data);
+	var rand = Math.floor((Math.random() * 3) + 1);
+	if (rand == 1) {
+		document.getElementById('donationpopup').className = '';
+		document.getElementById('donate').addEventListener('click',function(){window.open('https://www.paypal.me/wbrantonaddons','_blank')});
+	}
     document.getElementById('loading-screen').className = 'hide';
 	document.getElementById('user-share').className = 'hide';
     document.getElementById('user-input').className = '';
