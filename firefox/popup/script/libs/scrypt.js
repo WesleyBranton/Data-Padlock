@@ -1,3 +1,6 @@
+/* MIT License. Copyright 2015-2018 Richard Moore <me@ricmoo.com>.
+ * See https://github.com/ricmoo/scrypt-js/blob/master/LICENSE.txt */
+
 "use strict";
 
 (function(root) {

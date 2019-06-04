@@ -1,4 +1,6 @@
-/*! MIT License. Copyright 2015-2018 Richard Moore <me@ricmoo.com>. See LICENSE.txt. */
+/* MIT License. Copyright 2015-2018 Richard Moore <me@ricmoo.com>.
+ * See https://github.com/ricmoo/aes-js/blob/master/LICENSE.txt */
+
 (function(root) {
     "use strict";
 
