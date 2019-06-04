@@ -2,12 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-var button = document.getElementsByTagName('button');
-for (i = 0; i < button.length; i++) {
-	button[i].addEventListener('click',openPage);
-}
-
-function openPage(e) {
-	var page = e.target.id;
-	window.location = page + '.html';
-}
+document.getElementById('send').addEventListener('click',function(){nav('send')});
+document.getElementById('read').addEventListener('click',function(){nav('read')});
+document.getElementById('about').addEventListener('click',function(){nav('about')});
+document.getElementById('terms').addEventListener('click',function(){window.open('https://addons.mozilla.org/firefox/addon/secure-send/eula/','_blank')});

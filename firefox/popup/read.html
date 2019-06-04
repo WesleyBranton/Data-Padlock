@@ -1,0 +1,63 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Receive Message | Secure Send</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="stylesheet/theme.css"/>
+		<link rel="shortcut icon" href="../icons/icon-96.png"/>
+	</head>
+	<body class="purple">
+		<div id="container">
+			<header>
+				<img src="image/logo.jpg"/>
+			</header>
+			<section id="user-input" class="hide">
+				<div id="message-box-container" class="unloaded">
+					<label for="secret">Code: </label>
+					<textarea id="secret"></textarea>
+					<p>To read this message, please enter the password set by the message sender.</p>
+				</div>
+				<label for="code">Password: </label>
+				<input type="password" id="code" name="code"/><br><br>
+				<div class="bar">
+					<button id="load" class="main-item purple" disabled>Read Message</button>
+					<button id="return" class="second-item red">&times;</button>
+				</div>
+				<div class="warning" id="wrongpassword" style="display:none">
+					Incorrect password!
+				</div>
+			</section>
+			<section id="user-share" class="hide">
+				<div id="icon">
+					<img src="image/unlocked.png"/>
+				</div>
+				<h2>This message has been unlocked!</h2>
+				<label for="unlocked-message">Message: </label>
+				<textarea id="unlocked-message" readonly tabindex="-1"></textarea><br><br>
+				<div class="bar">
+					<button id="read-new" class="main-item blue" tabindex="-1">Read Another Message</button>
+					<button id="share-new" class="second-item red nowrap" tabindex="-1">&times;</button>
+				</div>
+				<div class="warning">
+					<b>&#x26A0; WARNING:</b><br>
+					For privacy, it's recommended that you don't save or print this message in plaintext.
+				</div>
+			</section>
+			<section id="loading-screen">
+				<div id="loader" class="purple"></div>
+			</section>
+		</div>
+		<script src="script/libs/buffer.js" type="text/javascript"></script>
+		<script src="script/libs/unorm.js" type="text/javascript"></script>
+		<script src="script/libs/scrypt.js" type="text/javascript"></script>
+		<script src="script/libs/generate.js" type="text/javascript"></script>
+		<script src="script/libs/index.js" type="text/javascript"></script>
+		<script src="script/navigation.js"></script>
+		<script src="script/decrypt.js"></script>
+	</body>
+</html>

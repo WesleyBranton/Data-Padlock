@@ -19,3 +19,11 @@ To develop and test the extension, you need to open the "about:debugging" page i
 Further documentation about developing Firefox extensions can be found [here](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension).
 
 ## Release Notes
+### Version 2.0
+* **[NEW]** Updated encryption algorithm for better security
+* **[NEW]** Can now share messages via links
+* **[NEW]** *securesend.local* links will now launch the extension
+* **[NEW]** Extension opens in popup window
+* **[NEW]** Added ability to detect messages created with older version
+* **[FIXED]** Extension can now tell when a password is incorrect
+* **[CHANGED]** UI update
