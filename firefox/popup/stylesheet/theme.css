@@ -341,3 +341,9 @@ body.menu {
     text-decoration:underline;
     cursor:pointer;
 }
+
+.link {
+	color:blue;
+	cursor:pointer;
+	text-decoration:underline;
+}

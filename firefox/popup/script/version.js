@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-document.getElementById('view').addEventListener('click',function(){window.open('https://addons.mozilla.org/firefox/addon/secure-send/versions/')});
+document.getElementById('view').addEventListener('click',function(){window.open('https://addons.mozilla.org/firefox/addon/secure-send/versions/','_blank')});
+document.getElementById('moreinfo').addEventListener('click',function(){window.open('https://github.com/WesleyBranton/Secure-Send/wiki/How-to-read-messages-created-in-a-different-version','_blank')});
 document.getElementById('cancel').addEventListener('click',function(){nav('main')});
 load();
 
