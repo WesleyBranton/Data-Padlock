@@ -4,6 +4,8 @@
 
 browser.browserAction.onClicked.addListener(function(){open("/popup/main.html")});
 browser.webRequest.onBeforeRequest.addListener(getMessage,{urls: ["*://*.securesend.local/*","*://securesend.local/*"]},["blocking"]);
+var isAndroid;
+detectOS();
 
 // Open window
 function open(page) {
@@ -21,4 +23,14 @@ function getMessage(requestDetails) {
 		open("/popup/read.html" + msg);
 	}
 	return {cancel: true};
+}
+
+// Detect user operating system
+async function detectOS() {
+	var userOS = await browser.runtime.getPlatformInfo();
+	if (userOS.os == 'android') {
+		isAndroid = true;
+	} else {
+		isAndroid = false;
+	}
 }
