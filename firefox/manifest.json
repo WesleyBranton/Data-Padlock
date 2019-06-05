@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Secure Send",
-	"version": "2.0",
+	"version": "2.1",
 	"description": "Secure your messages using encryption!",
 	"author": "Wesley Branton",
 	
@@ -27,5 +27,5 @@
 		"scripts": ["background.js"]
 	},
 	
-	"permissions": ["storage","webRequest","webRequestBlocking","*://*.securesend.local/*","*://securesend.local/*"]
+	"permissions": ["storage","tabs","webRequest","webRequestBlocking","*://*.securesend.local/*","*://securesend.local/*"]
 }
