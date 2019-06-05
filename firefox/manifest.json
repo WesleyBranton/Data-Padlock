@@ -33,5 +33,5 @@
 		"scripts": ["background.js"]
 	},
 	
-	"permissions": ["storage","webRequest","webRequestBlocking","*://*.securesend.local/*","*://securesend.local/*"]
+	"permissions": ["storage","tabs","webRequest","webRequestBlocking","*://*.securesend.local/*","*://securesend.local/*"]
 }

@@ -9,10 +9,16 @@ detectOS();
 
 // Open window
 function open(page) {
-	browser.windows.create({
-		type:"popup",
-		url:page
-	});
+	if (!isAndroid) {
+		browser.windows.create({
+			type:"popup",
+			url:page
+		});
+	} else {
+		browser.tabs.create({
+			url:page
+		});
+	}
 }
 
 // Load message URL
