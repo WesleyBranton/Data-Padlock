@@ -9,6 +9,12 @@
 		"name": "Wesley Branton",
 		"url": "http://addons.wesleybranton.com"
 	},
+	
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "securesend@wesleybranton.com"
+		}
+	},
 
 	"icons": {
 		"32": "icons/icon-32.png",
