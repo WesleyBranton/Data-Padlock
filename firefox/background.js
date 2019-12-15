@@ -12,6 +12,8 @@ function open(page) {
 	if (!isAndroid) {
 		browser.windows.create({
 			type:"popup",
+            height:900,
+            width:550,
 			url:page
 		});
 	} else {
