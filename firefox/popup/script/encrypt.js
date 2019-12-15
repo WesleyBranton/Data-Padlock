@@ -2,204 +2,291 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+// Define UI elements
+const messageInput = document.getElementById('secret');
+const passwordInput = document.getElementById('code');
+const passwordConfirmationInput = document.getElementById('confirm-code');
+
+const shareURLOutput = document.getElementById('share-msg');
+const shareURLCopyButton = document.getElementById('share-button');
+const startNewMessageButton = document.getElementById('share-new');
+
+const encryptButton = document.getElementById('copy');
+const menuButton = document.getElementById('return');
+const weakPasswordConfirmButton = document.getElementById('continue');
+const weakPasswordCancelButton = document.getElementById('cancel');
+
+const mainBar = document.getElementById('main-bar');
+const passwordWarningBar = document.getElementById('password-bar');
+
+const loadingScreen = document.getElementById('loading-screen');
+const shareScreen = document.getElementById('user-share');
+const inputScreen = document.getElementById('user-input');
+
+const passwordStrengthBar = document.getElementById('strengthbar');
+const passwordRequirementsContainer = document.getElementById('password-requirements');
+const passwordRequirementsLength = document.getElementById('password-requirements-length');
+const passwordRequirementsLowercase = document.getElementById('password-requirements-lowercase');
+const passwordRequirementsUppercase = document.getElementById('password-requirements-uppercase');
+const passwordRequirementsNumber = document.getElementById('password-requirements-number');
+const passwordRequirementsSymbol = document.getElementById('password-requirements-symbol');
+
+// Register event listeners
+messageInput.addEventListener('keyup', verify);
+passwordInput.addEventListener('keyup', verify);
+passwordInput.addEventListener('keyup', function () {
+    passwordConfirmationInput.value = ''
+});
+passwordConfirmationInput.addEventListener('keyup', verify);
+passwordInput.addEventListener('focus', function () {
+    togglePasswordRequirements(true)
+});
+passwordInput.addEventListener('blur', function () {
+    togglePasswordRequirements(false)
+});
+shareURLOutput.addEventListener('focus', clipboard);
+shareURLOutput.addEventListener('click', clipboard);
+shareURLCopyButton.addEventListener('click', clipboard);
+encryptButton.addEventListener('click', function () {
+    encryptMsg(false)
+});
+weakPasswordConfirmButton.addEventListener('click', function () {
+    encryptMsg(true)
+});
+menuButton.addEventListener('click', function () {
+    nav('main')
+});
+weakPasswordCancelButton.addEventListener('click', cancel);
+startNewMessageButton.addEventListener('click', startNew);
+
+// Run page load scripts
 verify();
-document.getElementById('secret').addEventListener('keyup',verify);
-document.getElementById('code').addEventListener('keyup',verify);
-document.getElementById('code').addEventListener('keyup',function(){document.getElementById('confirm-code').value = ''});
-document.getElementById('confirm-code').addEventListener('keyup',verify);
-document.getElementById('code').addEventListener('focus',showpass);
-document.getElementById('code').addEventListener('blur',hidepass);
-document.getElementById('share-msg').addEventListener('focus',clipboard);
-document.getElementById('share-msg').addEventListener('click',clipboard);
-document.getElementById('share-button').addEventListener('click',clipboard);
-document.getElementById('copy').addEventListener('click',function(){encryptMsg(false)});
-document.getElementById('continue').addEventListener('click',function(){encryptMsg(true)});
-document.getElementById('return').addEventListener('click',function(){nav('main')});
-document.getElementById('cancel').addEventListener('click',cancel);
-document.getElementById('share-new').addEventListener('click',reset);
-load();
+pageLoad();
 
-// Save encrypted message to clipboard
+/**
+ * Copy share URL to clipboard
+ */
 function clipboard() {
-	document.getElementById('share-msg').select();
-	document.execCommand('copy');
+    shareURLOutput.select();
+    document.execCommand('copy');
 }
 
-// Start message encryption
-function encryptMsg(bypass) {
-	// Check if password is weak & that user has not confirmed the use of a weak password
-	if (getPasswordScore() < 5 && !bypass) {
-		document.getElementById('code').disabled = true;
-		document.getElementById('secret').disabled = true;
-		document.getElementById('main-bar').className = 'bar hide';
-		document.getElementById('password-bar').className = '';
-	} else {
-		showLoading();
-		var message = document.getElementById("secret").value;
-		message += 'secsend';
-		var password = document.getElementById("code").value;
-		cancel();
-		start(message, password, 1);
-	}
+/**
+ * Start message encryption
+ * @param {boolean} bypassWeakPassword
+ */
+function encryptMsg(bypassWeakPassword) {
+    let message = messageInput.value + 'secsend';
+    let password = passwordInput.value;
+
+    if (getPasswordScore(password) < 5 && !bypassWeakPassword) {
+        passwordInput.disabled = true;
+        messageInput.disabled = true;
+        mainBar.className = 'bar hide';
+        passwordWarningBar.className = '';
+    } else {
+        showLoading();
+        cancel();
+        start(message, password, 1);
+    }
 }
 
-// Cancel weak password
+/**
+ * Abort due to weak password
+ */
 function cancel() {
-	document.getElementById('code').disabled = false;
-	document.getElementById('secret').disabled = false;
-	document.getElementById('password-bar').className = 'hide';
-	document.getElementById('main-bar').className = 'bar';
+    passwordInput.disabled = false;
+    messageInput.disabled = false;
+    passwordWarningBar.className = 'hide';
+    mainBar.className = 'bar';
 }
 
-// Encrypt password
-function encrypt(msg,key) {
-	var iv = generateIV(16);
-	while (msg.length % 16) {
-		msg += ' ';
-	}
-	var msgBytes = aesjs.utils.utf8.toBytes(msg);
-	var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
-	var encryptedBytes = aesCbc.encrypt(msgBytes);
-	var encryptedHex = aesjs.utils.hex.fromBytes(iv) + aesjs.utils.hex.fromBytes(encryptedBytes);
-	saveMsg(encryptedHex.toUpperCase());
+/**
+ * Encrypt message
+ * @param {string} message
+ * @param {string} key
+ */
+function encrypt(message, key) {
+    let iv, msgBytes, aesCbc, encryptedBytes, encryptedHex;
+
+    iv = generateIV(16);
+
+    while (message.length % 16) {
+        message += ' ';
+    }
+
+    msgBytes = aesjs.utils.utf8.toBytes(message);
+    aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+    encryptedBytes = aesCbc.encrypt(msgBytes);
+    encryptedHex = aesjs.utils.hex.fromBytes(iv) + aesjs.utils.hex.fromBytes(encryptedBytes);
+
+    saveMsg(encryptedHex.toUpperCase());
 }
 
-// Output the encrypted password
-function saveMsg(msg) {
-	msg = 'http://securesend.local?m=' + msg + 'VER2';
-	var share = document.getElementById("share-msg");
-	share.value = msg;
-	document.getElementById('loading-screen').className = 'hide';
-	document.getElementById('user-share').className = '';
-	var message = document.getElementById("secret");
-	var password = document.getElementById("code");
-	message.value = '';
-	password.value = '';
-	verify();
+/**
+ * Output encrypted message URL
+ * @param {string} message
+ */
+function saveMsg(message) {
+    message = 'http://securesend.local?m=' + message + 'VER2';
+    shareURLOutput.value = message;
+    loadingScreen.className = 'hide';
+    shareScreen.className = '';
+    messageInput.value = '';
+    passwordInput.value = '';
+    verify();
 }
 
-// Verify user information
+/**
+ * Verify all required information is entered
+ */
 function verify() {
-	// Check that password and message have been filled
-	if (document.getElementById('secret').value.length > 0 && document.getElementById('code').value.length > 0 && document.getElementById('code').value == document.getElementById('confirm-code').value) {
-		document.getElementById('copy').disabled = false;
-	} else {
-		document.getElementById('copy').disabled = true;
-	}
-	
-	// Adjust the password strength information
-	var strength = document.getElementById('strengthbar');
-	var score = getPasswordScore();
-	if (score < 1) {
-		strength.className = 'none';
-	} else if (score < 4 && score >= 2) {
-		strength.className = 'bad';
-	} else if (score < 5 && score >= 4) {
-		strength.className = 'weak';
-	} else if (score < 6 && score >= 5) {
-		strength.className = 'fair';
-	} else if (score >= 6) {
-		strength.className = 'good';
-	}
+    let score;
+
+    if (messageInput.value.length > 0 && passwordInput.value.length > 0 && passwordInput.value == passwordConfirmationInput.value) {
+        encryptButton.disabled = false;
+    } else {
+        encryptButton.disabled = true;
+    }
+
+    score = getPasswordScore(passwordInput.value);
+    if (score < 1) {
+        passwordStrengthBar.className = 'none';
+    } else if (score < 4 && score >= 2) {
+        passwordStrengthBar.className = 'bad';
+    } else if (score < 5 && score >= 4) {
+        passwordStrengthBar.className = 'weak';
+    } else if (score < 6 && score >= 5) {
+        passwordStrengthBar.className = 'fair';
+    } else if (score >= 6) {
+        passwordStrengthBar.className = 'good';
+    }
 }
 
-// Check password strength
-function getPasswordScore() {
-	var password = document.getElementById('code').value;
-	var score = 0;
-	
-	// There is a password entered
-	if (password.length > 0) {
-		score++;
-	}
-	
-	// Password longer than 8 characters
-	if (password.length > 8) {
-		score++;
-		document.getElementById('password-requirements-length').className = 'pass';
-	} else {
-		document.getElementById('password-requirements-length').className = 'fail';
-	}
-	
-	// There is a lowercase letter
-	if (/[a-z]/.test(password)) {
-		score++;
-		document.getElementById('password-requirements-lowercase').className = 'pass';
-	} else {
-		document.getElementById('password-requirements-lowercase').className = 'fail';
-	}
-	
-	// There is an uppercase letter
-	if (/[A-Z]/.test(password)) {
-		score++;
-		document.getElementById('password-requirements-uppercase').className = 'pass';
-	} else {
-		document.getElementById('password-requirements-uppercase').className = 'fail';
-	}
-	
-	// There is a number
-	if (/[0-9]/.test(password)) {
-		score++;
-		document.getElementById('password-requirements-number').className = 'pass';
-	} else {
-		document.getElementById('password-requirements-number').className = 'fail';
-	}
-	
-	// There is a symbol
-	if (/[!@#$%^&*(),.?]/.test(password)) {
-		score++;
-		document.getElementById('password-requirements-symbol').className = 'pass';
-	} else {
-		document.getElementById('password-requirements-symbol').className = 'fail';
-	}
-	
-	return score;
+/**
+ * Calculate password strength
+ * @param {string} password
+ * @return {number} strength
+ */
+function getPasswordScore(password) {
+    let score = 0;
+    let pass = 'pass';
+    let fail = 'fail';
+
+    // Exists
+    if (password.length > 0) {
+        score++;
+    }
+
+    // More than 8 characters
+    if (password.length > 8) {
+        score++;
+        passwordRequirementsLength.className = pass;
+    } else {
+        passwordRequirementsLength.className = fail;
+    }
+
+    // Includes lowercase letter
+    if (/[a-z]/.test(password)) {
+        score++;
+        passwordRequirementsLowercase.className = pass;
+    } else {
+        passwordRequirementsLowercase.className = fail;
+    }
+
+    // Includes uppercase letter
+    if (/[A-Z]/.test(password)) {
+        score++;
+        passwordRequirementsUppercase.className = pass;
+    } else {
+        passwordRequirementsUppercase.className = fail;
+    }
+
+    // Includes number
+    if (/[0-9]/.test(password)) {
+        score++;
+        passwordRequirementsNumber.className = pass;
+    } else {
+        passwordRequirementsNumber.className = fail;
+    }
+
+    // Includes symbol
+    if (/[!@#$%^&*(),.?]/.test(password)) {
+        score++;
+        passwordRequirementsSymbol.className = pass;
+    } else {
+        passwordRequirementsSymbol.className = fail;
+    }
+
+    return score;
 }
 
-// Show the password stength dropdown
-function showpass() {
-	document.getElementById('password-requirements').style.maxHeight = document.getElementById('password-requirements').scrollHeight + 'px';
-    document.getElementById('password-requirements').style.marginBottom = '1em';
+/**
+ * Toggle password requirements information
+ * @param {boolean} show
+ */
+function togglePasswordRequirements(show) {
+    if (show) {
+        passwordRequirementsContainer.style.maxHeight = passwordRequirementsContainer.scrollHeight + 'px';
+        passwordRequirementsContainer.style.marginBottom = '1em';
+    } else {
+        passwordRequirementsContainer.style.maxHeight = '0px';
+        passwordRequirementsContainer.style.marginBottom = '0';
+    }
 }
 
-// Hide the password strength dropdown
-function hidepass() {
-	document.getElementById('password-requirements').style.maxHeight = '0px';
-    document.getElementById('password-requirements').style.marginBottom = '0';
+/**
+ * Start a new message
+ */
+function startNew() {
+    shareScreen.className = 'hide';
+    inputScreen.className = '';
+    shareURLOutput.value = '';
+    location.reload();
 }
 
-// Reset fields
-function reset() {
-	document.getElementById('user-share').className = 'hide';
-	document.getElementById('user-input').className = '';
-	document.getElementById('share-msg').value = '';
-	location.reload();
-}
-
-// Handle page load
-async function load() {
+/**
+ * Handle page load
+ * @async
+ */
+async function pageLoad() {
     let data = await browser.storage.local.get();
+    let random = Math.floor((Math.random() * 3) + 1);
+
     pkeyload(data);
-	var rand = Math.floor((Math.random() * 3) + 1);
-	if (rand == 1) {
-		document.getElementById('donationpopup').className = '';
-		document.getElementById('donate').addEventListener('click',function(){window.open('https://www.paypal.me/wbrantonaddons','_blank')});
-	}
-    document.getElementById('loading-screen').className = 'hide';
-	document.getElementById('user-share').className = 'hide';
-    document.getElementById('user-input').className = '';
+
+    if (random == 1) {
+        document.getElementById('donationpopup').className = '';
+        document.getElementById('donate').addEventListener('click', function () {
+            window.open('https://www.paypal.me/wbrantonaddons', '_blank')
+        });
+    }
+
+    loadingScreen.className = 'hide';
+    shareScreen.className = 'hide';
+    inputScreen.className = '';
 }
 
-// P-Key Handler
-function pkeyload(info) {
-    if (!info.hidepk) {
-        document.getElementById('pkeyclose').addEventListener('click',pkeyclose);
-        document.getElementById('pkeyclick').addEventListener('click',function(){window.open('https://addons.mozilla.org/firefox/addon/password-generator/','_blank')});
+/**
+ * Insert P-Key Password Generator ad
+ * @param {Object} storageData
+ */
+function pkeyload(storageData) {
+    if (!storageData.hidepk) {
+        document.getElementById('pkeyclose').addEventListener('click', pkeyclose);
+        document.getElementById('pkeyclick').addEventListener('click', function () {
+            window.open('https://addons.mozilla.org/firefox/addon/password-generator/', '_blank')
+        });
         document.getElementById('pkeyad').className = '';
     }
 }
 
+/**
+ * Permanently close P-Key Password Generator ad
+ */
 function pkeyclose() {
-    browser.storage.local.set({hidepk: true});
+    browser.storage.local.set({
+        hidepk: true
+    });
     document.getElementById('pkeyad').className = 'hide';
 }
