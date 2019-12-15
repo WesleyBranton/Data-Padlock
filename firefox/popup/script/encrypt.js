@@ -5,6 +5,8 @@
 verify();
 document.getElementById('secret').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('keyup',verify);
+document.getElementById('code').addEventListener('keyup',function(){document.getElementById('confirm-code').value = ''});
+document.getElementById('confirm-code').addEventListener('keyup',verify);
 document.getElementById('code').addEventListener('focus',showpass);
 document.getElementById('code').addEventListener('blur',hidepass);
 document.getElementById('share-msg').addEventListener('focus',clipboard);
@@ -79,7 +81,7 @@ function saveMsg(msg) {
 // Verify user information
 function verify() {
 	// Check that password and message have been filled
-	if (document.getElementById('secret').value.length > 0 && document.getElementById('code').value.length > 0) {
+	if (document.getElementById('secret').value.length > 0 && document.getElementById('code').value.length > 0 && document.getElementById('code').value == document.getElementById('confirm-code').value) {
 		document.getElementById('copy').disabled = false;
 	} else {
 		document.getElementById('copy').disabled = true;
@@ -157,11 +159,13 @@ function getPasswordScore() {
 // Show the password stength dropdown
 function showpass() {
 	document.getElementById('password-requirements').style.maxHeight = document.getElementById('password-requirements').scrollHeight + 'px';
+    document.getElementById('password-requirements').style.marginBottom = '1em';
 }
 
 // Hide the password strength dropdown
 function hidepass() {
 	document.getElementById('password-requirements').style.maxHeight = '0px';
+    document.getElementById('password-requirements').style.marginBottom = '0';
 }
 
 // Reset fields
