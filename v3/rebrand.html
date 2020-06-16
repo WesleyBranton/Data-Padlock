@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Secure Send is now Data Padlock!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheet/theme.css">
+        <link rel="shortcut icon" href="../image/icon-128.png">
+    </head>
+    <body>
+        <header>
+            <div>
+                <img src="../image/securesend-128.png">
+                <img src="../image/arrow.png">
+                <img src="../image/icon-128.png">
+            </div>
+            <h1>Secure Send is now Data Padlock!</h1>
+        </header>
+        <section>
+            <h2>Why the branding change?</h2>
+            <p>There are two reasons behind this branding change from <i>Secure Send</i> to <i>Data Padlock</i>:</p>
+            <p>The primary reason for the change is a major transformation in features that the add-on offers. In the new version of the add-on, the focus has been shifted from only sharing messages to now encrypting files. The name <i>Secure Send</i> implied that the add-on was geared towards securely sending messages, instead of the many other usages that it has, such as encrypting content for cloud storage. The name <i>Data Padlock</i> targets the broader mission of locking your data, not just text-based messages.</p>
+            <p>The second comes from a marketing standpoint. The name <i>Secure Send</i> was similar to Firefox's file sharing service <i>Firefox Send</i>. Because of this, searches online for "Secure Send" frequently resulted in Firefox Send outranking the add-on. The name change will improve the add-on's visibility and also help to reduce the chance of brand confusion between the add-on and Firefox Send.</p>
+        </section>
+        <section class="collapsible">
+            <div class="head">
+                <h2>What happened to sharing links?</h2>
+                <h2>+</h2>
+            </div>
+            <article>
+                <p>This new version of the add-on has completely changed how messages or files are shared with other people. While previous versions of the add-on produced sharable links that automatically open in the add-on, this method was removed in favour of files. Now, the add-on produces a file that can be shared with other people.</p>
+                <p>There are a couple of reasons this feature is no longer in the newest version of this add-on:</p>
+                <p>The first is a technical limitation due to restrictions on the maximum length of a URL. Firefox (and other browsers) does have a limit to how long a URL can be. While most users may never have encountered this, users that were attempting to share longer messages would encounter issues when trying to open or share large links.</p>
+                <p>The obvious fix for this could have been to allow users to just copy and paste the encrypted text, but an issue with that approach is that the text could be misformatted by messaging services if it contained non-regular characters. This would make it impossible to read the original message. Making sure that the outputted text always contains regular characters is possible, but would dramatically increase the size of the text.</p>
+                <p>Instead, encrypting a message now produces a file that can be saved and sent to the intended recipient. This approach also integrates better with the new file encryption abilities that the add-on has.</p>
+            </article>
+        </section>
+        <section class="collapsible">
+            <div class="head">
+                <h2>What else is new?</h2>
+                <h2>+</h2>
+            </div>
+            <article>
+                <p>In addition to what's already been mentioned above, the add-on has essentially been rebuilt from the ground up. This includes a brand new implementation of AES encryption that use's the browser's built-in encryption libraries instead of a third-party library. Unfortunately, this means that messages encrypted with an older version of the add-on cannot be opened with a newer version, but a complete archive of previous versions will remain available on both <a href="https://github.com/WesleyBranton/Data-Padlock/releases" target="_blank">GitHub</a> and <a href="https://addons.mozilla.org/firefox/addon/data-padlock/versions/" target="_blank"></a>the Mozilla add-on website</a>.</p>
+                <p>There are a variety of other changes, the biggest of which is the newly added support for file encryption. To read a complete list of changes, <a href="https://github.com/WesleyBranton/Data-Padlock/releases/latest" target="_blank">click here</a>.</p>
+            </article>
+        </section>
+        <script src="../script/main.js"></script>
+    </body>
+</html>

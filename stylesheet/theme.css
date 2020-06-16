@@ -1,0 +1,72 @@
+:root {
+    --color-main: #AC932F;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14pt;
+}
+
+header {
+    background: linear-gradient(45deg, #1B2A41, #324A5F);
+    background: linear-gradient(45deg, #016FB9, #22AED1);
+    background: linear-gradient(45deg, #000022, #001242);
+    background: linear-gradient(45deg, #63372C, #C97D60);
+    background: linear-gradient(45deg, #57886C, #81A684);
+    background: linear-gradient(45deg, #643173, #7D5BA6);
+    background: linear-gradient(45deg, #004BA8, #3E78B2);
+    background: linear-gradient(45deg, #5B7553, #8EB897);
+    background: linear-gradient(45deg, #124559, #598392);
+    background: linear-gradient(45deg, #2C2B3C, #403F4C);
+    background: linear-gradient(45deg, #503B31, #705D56);
+    background: linear-gradient(45deg, #392A16, #634133);
+    color: white;
+    text-align: center;
+    font-size: 150%;
+    padding: 3em 1em;
+}
+
+header h1 {
+    color: white;
+}
+
+section {
+    width: 90%;
+    max-width: 1500px;
+    margin: auto;
+    border-top: 2px solid #EEE;
+}
+
+section:first-of-type {
+    border: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    color: var(--color-main);
+}
+
+.collapsible article {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.collapsible .head {
+    cursor: pointer;
+    display: flex;
+}
+
+.collapsible .head h2:first-of-type {
+    flex: 1;
+}
+
+a {
+    color: var(--color-main);
+}
+
+.notes {
+    font-size: 60%;
+}
