@@ -17,6 +17,25 @@ To develop and test the extension, you need to open the "about:debugging" page i
 Further documentation about developing Firefox extensions can be found [here](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension).
 
 ## Release Notes
+### Version 3.0.0
+* **[NEW]** Files can now be encrypted/decrypted
+* **[NEW]** Cryptography algorithm changed to AES-GCM
+* **[NEW]** Added support for Firefox on Android
+* **[NEW]** Added encryption timestamp
+* **[NEW]** Users now required to agree to EULA and Privacy Policy
+* **[CHANGED]** Cryptography output is now a file
+* **[CHANGED]** Rebranded to **Data Padlock**
+* **[CHANGED]** Cryptography performed using builtin API, not third-party library
+* **[CHANGED]** Password salting now randomized
+* **[CHANGED]** Expanded wiki information
+* **[FIXED]** Improved version detection
+* **[FIXED]** Improved wrong password handling
+* **[FIXED]** Updated UI to more closely comply with the Web Content Accessibility Guidelines
+* **[FIXED]** Disabling text field autocomplete (on mobile)
+* **[FIXED]** Stopped Firefox from asking to save password
+* **[FIXED]** Various performance optimizations
+* **[REMOVED]** Removed link sharing
+
 ### Version 2.2
 * **[NEW]** Added password confirmation field
 
