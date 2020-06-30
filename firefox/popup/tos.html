@@ -1,0 +1,65 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>End-User License Agreement</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="stylesheet/theme.css">
+  <link rel="stylesheet" href="stylesheet/tos.css">
+  <link rel="shortcut icon" href="../icons/icon-96.png">
+</head>
+
+<body class="menu">
+  <div id="container">
+
+    <!-- Header -->
+    <header>
+      <img src="../icons/icon-64.png" alt="dp">
+      <h1>Data Padlock</h1>
+    </header>
+
+    <!-- Main screen -->
+    <section id="screen-input" class="hide">
+      <h1>End-User License Agreement</h1>
+      <p>Before you can use this browser extension, you must review the associated End-User License Agreement and Privacy Policy:</p>
+      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/eula/" target="_blank" tabindex="0">Click here to read the End-User License Agreement</a></p>
+      <label><input id="eula-checkbox" type="checkbox" class="error" tabindex="0"> I have read and agree to the End-User License Agreement</label>
+      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/privacy/" target="_blank" tabindex="0">Click here to read the Privacy Policy</a></p>
+      <label><input id="pp-checkbox" type="checkbox" class="error" tabindex="0"> I have read and agree to the Privacy Policy</label>
+
+      <!-- Menu bar -->
+      <div class="bar">
+        <button id="agree" class="main flex" disabled tabindex="0">I agree</button>
+        <button id="cancel" class="nocolor nowrap" tabindex="0">Cancel</button>
+      </div>
+    </section>
+
+    <!-- Failed to agree screen -->
+    <section id="screen-output" class="hide">
+      <h1>Please, uninstall this browser extension</h1>
+      <p>To use this browser extension, all users must agree to the End-User License Agreement and Privacy Policy.</p>
+      <p>If you do not agree with either of these documents, please uninstall this browser extension from Firefox. <a href="https://support.mozilla.org/kb/disable-or-remove-add-ons" target="_blank">Click here to find out how.</a></p>
+
+      <!-- Menu bar -->
+      <div class="bar">
+        <button id="menu" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> Menu</button>
+      </div>
+    </section>
+
+    <!-- Loading wheel -->
+    <section id="loading-screen">
+      <div id="loader"></div>
+    </section>
+
+  </div>
+  <script src="script/navigation.js"></script>
+  <script src="script/general.js"></script>
+  <script src="script/tos.js"></script>
+</body>
+
+</html>

@@ -6,33 +6,38 @@
 <html>
 
 <head>
-  <title>Secure Send</title>
+  <title>Menu</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
+  <link rel="stylesheet" href="stylesheet/menu.css">
   <link rel="shortcut icon" href="../icons/icon-96.png">
 </head>
 
 <body class="menu">
   <div id="container">
+
+    <!-- Header -->
     <header>
-      <img src="image/logo.jpg">
+      <img src="../icons/icon-64.png" alt="dp">
+      <h1>Data Padlock</h1>
     </header>
+
+    <!-- Menu buttons -->
     <section id="menu-buttons">
-      <button id="send" class="menu-btn blue">Send<br>Message</button>
-      <br>
-      <button id="read" class="menu-btn purple">Read<br>Message</button>
-      <br>
-      <br>
-      <center>
-        <button id="about" class="second-item nocolor nowrap">How It Works</button>
-        <br>
-        <button id="terms" class="second-item nocolor nowrap">Terms of Service</button>
-      </center>
+      <button id="lock" class="menu-btn big main" tabindex="0">Encrypt Data</button>
+      <button id="unlock" class="menu-btn big main" tabindex="0">Decrypt Data</button>
+      <button id="wiki" class="second-item nocolor nowrap space" tabindex="0">Wiki</button>
+      <button id="release" class="second-item nocolor nowrap" tabindex="0">Release Notes</button>
+      <button id="terms" class="second-item nocolor nowrap" tabindex="0">End-User License Agreement</button>
+      <button id="privacy" class="second-item nocolor nowrap" tabindex="0">Privacy Policy</button>
     </section>
+
+    <!-- Loading wheel -->
     <section id="loading-screen" class="hide">
-      <div id="loader" class="blue"></div>
+      <div id="loader"></div>
     </section>
+
   </div>
   <script src="script/menu.js"></script>
   <script src="script/navigation.js"></script>

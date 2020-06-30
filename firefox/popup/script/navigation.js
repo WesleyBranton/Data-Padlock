@@ -8,21 +8,15 @@
  */
 function nav(page) {
     showLoading();
-    window.location.href = './' + page + '.html';
+    window.location.href = `./${page}.html`;
 }
 
 /**
  * Show loading bar
  */
 function showLoading() {
-    if (document.getElementById('user-share')) {
-        document.getElementById('user-share').className = 'hide';
-    }
-    if (document.getElementById('user-input')) {
-        document.getElementById('user-input').className = 'hide';
-    }
-    if (document.getElementById('menu-buttons')) {
-        document.getElementById('menu-buttons').className = 'hide';
-    }
+    if (document.getElementById('screen-input')) document.getElementById('screen-input').className = 'hide';
+    if (document.getElementById('screen-output')) document.getElementById('screen-output').className = 'hide';
+    if (document.getElementById('menu-buttons')) document.getElementById('menu-buttons').className = 'hide';
     document.getElementById('loading-screen').className = '';
 }

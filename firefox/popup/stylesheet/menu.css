@@ -1,0 +1,33 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/* Padding */
+body.menu #lock {
+  margin-top: 10vh;
+}
+/* Padding - end */
+
+/* Buttons */
+button {
+  margin: auto;
+  display: block;
+}
+
+.space {
+  margin-top: 2em;
+}
+
+.menu-btn {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+  min-width: 300px;
+  padding: 30px 10px;
+  width: 100%;
+}
+
+.menu-btn.big {
+  font-size: 200%;
+}
+/* Buttons - end */

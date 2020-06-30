@@ -1,11 +1,11 @@
-# Secure Send [<img align="right" src=".github/fxaddon.png">](https://addons.mozilla.org/firefox/addon/secure-send/)
+# Data Padlock [<img align="right" src=".github/fxaddon.png">](https://addons.mozilla.org/firefox/addon/data-padlock/)
 Any personal information sent over the internet is vulnerable to security threats like wiretapping. Thankfully, encryption exists to help protect data transmitted over the internet. Encryption is a process used to convert plain text into data that cannot be understood by anyone else but the intended receiver.
 
-Secure Send uses the Advanced Encryption Standard (AES) to locally convert your message into garbled text until the receiver enters the configured password. AES encryption provides a high level of security, so much so that it is used by the US government!
+Data Padlock uses the Advanced Encryption Standard (AES) to locally encrypt your files or messages until the receiver enters the configured password. AES encryption provides a high level of security, so much so that it is used by the US government!
 
-Secure Send is simple to use. Simply enter your text into the add-on, assign a password and the encrypted message will be added to your clipboard so that you can paste it into your instant messaging service or email client. When the receiver gets the message, they simply paste the encrypted text into the Secure Send add-on and enter the password.
+Data Padlock is simple to use. Simply attach your file or enter your text into the add-on, assign a password and the encrypted file will be saved so you can use it on your instant messaging service or email client. When the receiver gets the file, they simply attach the file to the Data Padlock add-on and enter the password.
 
-Keep your private messages private with Secure Send!
+Keep your private files and messages private with Data Padlock!
 
 ## Development
 This repository contains all of the required source code files to make changes to this extension. The "master" branch contains the source code for the latest stable release. If you want to test that version, you can view the release section to download the XPI file or visit the add-on listing on Mozilla.

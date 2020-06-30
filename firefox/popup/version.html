@@ -6,37 +6,46 @@
 <html>
 
 <head>
-  <title>Incorrect Version | Secure Send</title>
+  <title>Incorrect Version</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
+  <link rel="stylesheet" href="stylesheet/version.css">
   <link rel="shortcut icon" href="../icons/icon-96.png">
 </head>
 
 <body>
   <div id="container">
+
+    <!-- Header -->
     <header>
-      <img src="image/logo.jpg">
+      <img src="../icons/icon-64.png" alt="dp">
+      <h1>Data Padlock</h1>
     </header>
-    <section id="user-input">
-      <center>
-        <h1>Wrong Version Detected!</h1>
-        <p>The message you are attempting to read was created using <b>Version <span id="versionnumber"></span></b> of the Secure Send extension and, therefore, cannot be opened using this version.</p>
-        <p>To view this message, you will need to download the correct version of Secure Send. <span id="moreinfo" class="link">Click here for more information.</span></p>
-      </center>
+
+    <!-- Main screen -->
+    <section id="screen-input">
+      <h1>Wrong Version Detected!</h1>
+      <p>The file you are attempting to decrypt was created using <b><span id="versionnumber"></span></b> of the Data Padlock extension and, therefore, cannot be opened using this version.</p>
+      <p>To decrypt this file, you will need to download the correct version of Data Padlock. <a href="https://github.com/WesleyBranton/Data-Padlock/wiki/Decrypting-content-from-an-older-version" target="_blank">Click here for more information.</a></p>
+
+      <!-- Warning notice -->
       <div class="note">
-        <b>&#x26A0; NOTE:</b>
-        <br>
-        Older versions of Secure Send should only be used to read old messages. New messages should never be created using an old version.
+        Older versions of Data Padlock should only be used to decrypt data. <b>New data should never be encrypted using an old version.</b>
       </div>
+
+      <!-- Menu bar -->
       <div class="bar">
-        <button id="view" class="main-item blue">Download Old Version</button>
-        <button id="cancel" class="second-item nocolor nowrap">Cancel</button>
+        <button id="view" class="main flex"><img src="image/download.svg"> Download Old Version</button>
+        <button id="cancel" class="nocolor nowrap"><img src="image/close.svg"> Cancel</button>
       </div>
     </section>
+
+    <!-- Loading wheel -->
     <section id="loading-screen" class="hide">
-      <div id="loader" class="blue"></div>
+      <div id="loader"></div>
     </section>
+
   </div>
   <script src="script/navigation.js"></script>
   <script src="script/version.js"></script>

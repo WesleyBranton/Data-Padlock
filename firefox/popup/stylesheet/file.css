@@ -1,0 +1,72 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/* File drop area */
+#file-section {
+  margin-bottom: 1em;
+}
+
+#file-drop {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  height: 300px;
+  border: 3px dashed black;
+  border-radius: 10px;
+  transition: ease .5s background;
+  position: relative;
+  box-sizing: border-box;
+}
+
+#file-drop.highlight {
+  background: var(--green-pale);
+}
+
+#file-limit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: .5em;
+  color: black;
+  font-size: 80%;
+}
+
+#file-mode {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  user-select: none;
+}
+
+#file-drop.empty #no-file,
+#file-drop.loading #loading-file,
+#file-drop.found #found-file {
+  display: inline;
+}
+
+#file-drop > div,
+#file-section.mode-file .only-text,
+#file-section.mode-text .only-file {
+  display: none;
+}
+
+#file-drop > div > * {
+  display: block;
+  margin: auto;
+}
+
+#file-drop > div > button {
+  margin-top: .5em;
+}
+
+#loading-file #loader,
+#file-drop > div {
+  margin: auto !important;
+}
+/* File drop area - end */

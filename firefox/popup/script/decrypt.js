@@ -3,157 +3,226 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 // Define UI elements
-const messageInput = document.getElementById('secret');
-const passwordInput = document.getElementById('code');
+const UI = {
+    field: {
+        password: document.getElementById('password'),
+        output: document.getElementById('unlocked-message')
+    },
+    file: {
+        section: document.getElementById('file-section'),
+        input: document.getElementById('file'),
+        drop: document.getElementById('file-drop'),
+        browse: document.getElementById('file-browse'),
+        remove: document.getElementById('file-remove')
+    },
+    screen: {
+        loading: document.getElementById('loading-screen'),
+        input: document.getElementById('screen-input'),
+        output: document.getElementById('screen-output')
+    },
+    button: {
+        start: document.getElementById('copy'),
+        menu: document.getElementById('return'),
+        download: document.getElementById('share-download'),
+        new: document.getElementById('read-new'),
+        load: document.getElementById('load')
+    }
+};
 
-const startNewMessageButton = document.getElementById('share-new');
-const menuButton = document.getElementById('return');
-
-const loadingScreen = document.getElementById('loading-screen');
-const viewScreen = document.getElementById('user-share');
-const inputScreen = document.getElementById('user-input');
-const successScreen = document.getElementById('unlocked-message');
-
-const messageInputContainer = document.getElementById('message-box-container');
-const wrongPasswordMessage = document.getElementById('wrongpassword');
+// Set mode
+const encryption = false;
 
 // Register event listeners
-messageInput.addEventListener('keyup', verify);
-passwordInput.addEventListener('keyup', verify);
-document.getElementById('load').addEventListener('click', decryptMsg);
-menuButton.addEventListener('click', function () {
-    nav('main')
-});
-startNewMessageButton.addEventListener('click', function () {
-    nav('main')
-});
-document.getElementById('read-new').addEventListener('click', function () {
-    nav('read')
-});
+UI.field.password.addEventListener('keyup', verify);
+UI.button.load.addEventListener('click', decrypt);
+UI.button.menu.addEventListener('click', () => { nav('main') });
+UI.button.new.addEventListener('click', () => { nav('main') });
+UI.button.download.addEventListener('click', () => { saveFile(downloadFile.data, downloadFile.name) });
+UI.file.input.addEventListener('change', loadFile);
+registerFileDrop();
 
 // Run page load scripts
-verify();
 pageLoad();
 
 /**
  * Handle page load
  */
-function pageLoad() {
-    let message = getParameterByName('m');
-
-    if (message != null && message.length > 16) {
-        messageInput.value = message;
-        messageInputContainer.className = 'loaded';
-    } else {
-        messageInput.value = '';
-        messageInputContainer.className = 'unloaded';
-    }
-
-    loadingScreen.className = 'hide';
-    inputScreen.className = '';
-}
-
-
-/**
- * Get URL paramter
- * @param {string} parameter
- * @param {string} url
- * @return {string} value
- */
-function getParameterByName(parameter, url) {
-    let regex, results;
-
-    if (!url) {
-        url = window.location.href;
-    }
-
-    parameter = parameter.replace(/[\[\]]/g, "\\$&");
-    regex = new RegExp("[?&]" + parameter + "(=([^&#]*)|&|#|$)");
-    results = regex.exec(url);
-
-    if (!results) {
-        return null;
-    } else if (!results[2]) {
-        return '';
-    };
-
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+async function pageLoad() {
+    await checkToS('decrypt');
+    clearFields(true);
+    showDonationLink();
+    setScreen(UI.screen.input);
 }
 
 /**
  * Start message decryption
+ * @async
  */
-function decryptMsg() {
-    showLoading();
-    start(messageInput.value, passwordInput.value, 0);
-}
+async function decrypt() {
+    // Start loading screen
+    setScreen(UI.screen.loading);
+    let meta;
+    let data = fileContents;
 
-/**
- * Decrypt message
- * @param {string} message
- * @param {string} key
- */
-function decrypt(message, key) {
-    let msg, version,
-        iv, encryptedBytes, aesCbc, decryptedBytes, decryptedText;
+    // Parse meta data
+    const metaLengthDigits = parseInt(new TextDecoder().decode(data.slice(0, config.maxMetaLengthDigits)));
+    const metaLength = parseInt(new TextDecoder().decode(data.slice(config.maxMetaLengthDigits, config.maxMetaLengthDigits + metaLengthDigits)));
+    data = data.slice(config.maxMetaLengthDigits + metaLengthDigits);
+    meta = data.slice(0 - metaLength);
+    data = data.slice(0, data.byteLength - metaLength);
 
-    msg = message.toLowerCase();
-    msg = msg.trim();
-    version = msg.slice(msg.indexOf('ver') + 3);
-    msg = msg.slice(0, msg.indexOf('ver'));
+    // Parse key iterations
+    const iterationsMeta = parseInt(new TextDecoder().decode(data.slice(0, config.iterations.maxDigits)));
+    data = data.slice(config.iterations.maxDigits);
 
-    if (version != '2' || message.indexOf('VER') < 0) {
-        if (message.indexOf('VER') < 0) {
-            version = '1'
-        }
-        wrongVersion(version);
-    } else {
-        iv = aesjs.utils.hex.toBytes(msg.substr(0, 16 * 2));
-        encryptedBytes = aesjs.utils.hex.toBytes(msg.substr(16 * 2));
-        aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
-        decryptedBytes = aesCbc.decrypt(encryptedBytes);
-        decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-        saveMsg(decryptedText.trim());
-    }
-}
+    // Setup decryption
+    const key = await createKey(UI.field.password.value);
+    const saltMeta = data.slice(config.ivSize, config.ivSize + config.saltSize);
+    const algorithmMeta = {
+        name: config.mode,
+        iv: data.slice(0, config.ivSize)
+    };
+    data = data.slice(config.ivSize + config.saltSize);
 
-/**
- * Display message
- * @param {string} message
- */
-function saveMsg(message) {
-    if (message.slice(message.length - 7) == 'secsend') {
-        message = message.slice(0, message.length - 7);
-        successScreen.value = message;
-        viewScreen.className = '';
-        messageInput.value = '';
-        wrongPasswordMessage.style.display = 'none';
-    } else {
-        wrongPasswordMessage.style.display = 'block';
-        inputScreen.className = '';
+    // Try decrypting meta
+    try {
+        const keyMeta = await generateKey(key, saltMeta, iterationsMeta, 'decrypt');
+        meta = await crypto.subtle.decrypt(algorithmMeta, keyMeta, meta);
+    } catch (error) {
+        wrongPassword();
+        return false;
     }
 
-    passwordInput.value = '';
-    verify();
-    loadingScreen.className = 'hide';
+    // Parse meta
+    meta = JSON.parse(new TextDecoder().decode(meta));
+
+    // Get salt
+    const saltFile = new Uint8Array(config.saltSize);
+    saltFile.set(meta.salt.split(',').map(Number));
+
+    // Get IV
+    const ivFile = new Uint8Array(config.ivSize);
+    ivFile.set(meta.iv.split(',').map(Number));
+
+    // Setup decryption
+    const algorithmFile = {
+        name: config.mode,
+        iv: ivFile
+    };
+
+    // Try decrypting file
+    try {
+        const keyFile = await generateKey(key, saltFile, meta.iterations, 'decrypt');
+        data = await crypto.subtle.decrypt(algorithmFile, keyFile, data);
+    } catch (error) {
+        wrongPassword();
+        return false;
+    }
+
+    fileContents = null;
+
+    // Parse Time
+    let time = new Date(parseInt(meta.time));
+    time = time.toLocaleDateString() + ' @ ' + time.toLocaleTimeString();
+    document.getElementById('encryption-time').textContent = time;
+
+    // Refresh output screen
+    UI.screen.output.classList.remove('file');
+    UI.screen.output.classList.remove('message');
+
+    if (meta.isFile) {
+        // Handle file
+        UI.screen.output.classList.add('file');
+    } else {
+        // Handle message
+        data = new TextDecoder().decode(data);
+        meta.fileName += '.txt';
+        UI.field.output.value = data;
+        UI.screen.output.classList.add('message');
+    }
+
+    // Create file
+    const blob = new Blob([data], {
+        type: 'application/octet-binary'
+    });
+    downloadFile = {
+        name: meta.fileName,
+        data: URL.createObjectURL(blob)
+    };
+
+    // Change to end screen
+    setScreen(UI.screen.output);
+    clearFields(false);
 }
 
 /**
- * Show version mismatch error message
- * @param {number|string} version
+ * Handle wrong password errors
  */
-function wrongVersion(version) {
-    showLoading();
-    window.location.href = './version.html?v=' + version;
+function wrongPassword() {
+    UI.field.password.value = '';
+    createError('Incorrect password!');
+    setScreen(UI.screen.input);
+}
+
+/**
+ * Clear all input fields
+ * @param {boolean} all 
+ */
+function clearFields(all) {
+    if (all) {
+        UI.field.output.value = '';
+        downloadFile = null;
+        fileContents = null;
+    }
+
+    UI.field.password.value = '';
+    unloadFile();
 }
 
 /**
  * Verify all required information is entered
  */
 function verify() {
-    if (messageInput.value.length > 0 && passwordInput.value.length > 0) {
-        document.getElementById('load').disabled = false;
-    } else {
-        document.getElementById('load').disabled = true;
+    UI.button.load.disabled = ((!fileLoaded) || UI.field.password.value.length <= 0);
+}
+
+/**
+ * Checks if the file is valid
+ * @param {string} file
+ * @return {boolean} isValid
+ */
+function validFlag(flag) {
+    if (flag.indexOf(config.flag.short) != 0) {
+        createError('Invalid file detected!');
+        return false;
     }
+
+    return true;
+}
+
+/**
+ * Checks if the file type is valid
+ * @return {boolean} isValid
+ */
+function validFileType() {
+    const fileName = UI.file.input.files[0].name.toLowerCase();
+    const fileNameLength = fileName.length;
+
+    return (fileName.substring(fileNameLength - config.fileExtension.length, fileNameLength) == config.fileExtension);
+}
+
+/**
+ * Checks if the version flag matches the current version
+ * @param {string} flag 
+ */
+function checkVersion(flag) {
+    const version = parseInt(flag.substring(config.flag.short.length, flag.length));
+
+    if (version != config.version) {
+        setScreen(UI.screen.loading);
+        window.location.href = `./version.html?v=${version}`;
+        return false;
+    }
+
+    return true;
 }

@@ -1,0 +1,115 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Decrypt Data</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="stylesheet/theme.css">
+  <link rel="stylesheet" href="stylesheet/file.css">
+  <link rel="stylesheet" href="stylesheet/banner.css">
+  <link rel="stylesheet" href="stylesheet/output.css">
+  <link rel="shortcut icon" href="../icons/icon-96.png">
+</head>
+
+<body>
+  <div id="banner" class="error hidden">ERROR!</div>
+
+  <div id="container">
+
+    <!-- Header -->
+    <header>
+      <img src="../icons/icon-64.png" alt="dp">
+      <h1>Data Padlock</h1>
+    </header>
+
+    <!-- Input screen -->
+    <section id="screen-input" class="hide">
+      <section id="file-section" class="mode-file">
+        <!-- File drop zone -->
+        <div id="file-drop" class="only-file empty">
+
+          <!-- No file loaded -->
+          <div id="no-file">
+            <span>Drag and drop file</span>
+            <span>or</span>
+            <button id="file-browse" class="main">Select file...</button>
+          </div>
+
+          <!-- Loading file -->
+          <div id="loading-file">
+            <div id="loader"></div>
+          </div>
+
+          <!-- File loaded -->
+          <div id="found-file">
+            <span id="file-name">test.dpl</span>
+            <button id="file-remove" class="red">Remove</button>
+          </div>
+
+        </div>
+        <input id="file" type="file" accept=".dpl" style="display:none">
+      </section>
+
+      <!-- Inputs -->
+      <input type="password" id="password" placeholder="Password" autocomplete="off"><br><br>
+
+      <!-- Menu bar -->
+      <div class="bar">
+        <button id="load" class="main flex" disabled>Decrypt</button>
+        <button id="return" class="red"><img src="image/menu.svg" alt="Menu"></button>
+      </div>
+    </section>
+
+    <!-- Output screen -->
+    <section id="screen-output" class="hide">
+      <!-- Success icon -->
+      <div id="icon">
+        <img src="image/unlocked.png" alt="Unlocked">
+      </div>
+
+      <!-- Header -->
+      <h2>Your <span class="message-only">message</span><span class="file-only">file</span> has been decrypted!</h2>
+
+      <!-- Donation banner -->
+      <div id="donationpopup" class="hide">
+        <p>Data Padlock is a free browser extension supported solely by the support of users like you. Please consider making a donation.</p>
+        <button id="donate">Donate</button>
+      </div>
+
+      <!-- Message display area -->
+      <textarea id="unlocked-message" readonly autocomplete="off"></textarea>
+
+      <!-- Timestamp -->
+      <p><b>Encrypted on:</b> <span id="encryption-time">UNKNOWN</span></p>
+
+      <!-- Menu bar -->
+      <div class="bar">
+        <button id="share-download" class="green flex"><img src="image/download.svg"> Save</button>
+        <button id="read-new" class="main flex nowrap" tabindex="-1"><img src="image/menu.svg"> Menu</button>
+      </div>
+
+      <!-- Save file warning -->
+      <div class="note">
+        Pressing the <i>Save</i> button will save the decrypted <span class="message-only">message</span><span class="file-only">file</span> to your device.
+      </div>
+    </section>
+
+    <!-- Loading wheel -->
+    <section id="loading-screen">
+      <div id="loader"></div>
+    </section>
+
+  </div>
+  <script src="script/config.js"></script>
+  <script src="script/navigation.js"></script>
+  <script src="script/general.js"></script>
+  <script src="script/file.js"></script>
+  <script src="script/decrypt.js"></script>
+</body>
+
+</html>

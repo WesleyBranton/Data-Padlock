@@ -6,15 +6,9 @@
 let isAndroid;
 
 // Register event listeners
-browser.browserAction.onClicked.addListener(function () {
-    open("/popup/main.html")
-});
-browser.webRequest.onBeforeRequest.addListener(getMessage, {
-    urls: [
-        "*://*.securesend.local/*",
-        "*://securesend.local/*"
-    ]
-}, ["blocking"]);
+browser.browserAction.onClicked.addListener(() => { open('/popup/main.html') });
+browser.runtime.onMessage.addListener(messageHandler);
+browser.runtime.onInstalled.addListener(installHandler);
 
 // Run extension load scripts
 detectOS();
@@ -26,7 +20,7 @@ detectOS();
 function open(page) {
     if (!isAndroid) {
         browser.windows.create({
-            type: "popup",
+            type: 'popup',
             height: 900,
             width: 550,
             url: page
@@ -39,31 +33,48 @@ function open(page) {
 }
 
 /**
- * Parse message data from URL
- * @param {object} requestDetails
- * @return {object} cancel
- */
-function getMessage(requestDetails) {
-    let message = requestDetails.url;
-    message = message.slice(message.indexOf('?m='));
-
-    if (message.length > 3) {
-        open("/popup/read.html" + message);
-    }
-    return {
-        cancel: true
-    };
-}
-
-/**
  * Detect user operating system
  */
 async function detectOS() {
-    let userOS = await browser.runtime.getPlatformInfo();
+    const { os } = await browser.runtime.getPlatformInfo();
+    isAndroid = (os == 'android');
+}
 
-    if (userOS.os == 'android') {
-        isAndroid = true;
-    } else {
-        isAndroid = false;
+/**
+ * Opens file save as dialog
+ * @async
+ * @param {string} file
+ * @param {number} time
+ * @param {boolean} incognito
+ */
+async function saveFile(file, fileName, incognito) {
+    await browser.downloads.download({
+        url: file,
+        filename: fileName,
+        conflictAction: 'uniquify',
+        saveAs: true,
+        incognito: incognito
+    });
+}
+
+/**
+ * Handles incoming messages
+ * @param {Object} message
+ * @param {Object} sender
+ */
+function messageHandler(message, sender) {
+    switch (message.type) {
+        case 'save':
+            saveFile(message.file, message.fileName, sender.tab.incognito);
+    }
+}
+
+function installHandler(details) {
+    if (details.reason == 'install') {
+        browser.tabs.create({ url: 'https://wesleybranton.github.io/Data-Padlock/welcome?v=3.0' });
+    } else if (details.reason == 'update') {
+        if (parseFloat(details.previousVersion) < 3) {
+            browser.tabs.create({ url: 'https://wesleybranton.github.io/Data-Padlock/v3/rebrand' });
+        }
     }
 }

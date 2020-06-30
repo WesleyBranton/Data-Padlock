@@ -1,0 +1,147 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Encrypt Data</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="stylesheet/theme.css">
+  <link rel="stylesheet" href="stylesheet/password.css">
+  <link rel="stylesheet" href="stylesheet/file.css">
+  <link rel="stylesheet" href="stylesheet/banner.css">
+  <link rel="stylesheet" href="stylesheet/output.css">
+  <link rel="shortcut icon" href="../icons/icon-96.png">
+</head>
+
+<body>
+  <div id="banner" class="error hidden">ERROR!</div>
+
+  <div id="container">
+
+    <!-- Header -->
+    <header>
+      <img src="../icons/icon-64.png" alt="dp">
+      <h1>Data Padlock</h1>
+    </header>
+
+    <!-- Input screen -->
+    <section id="screen-input" class="hide">
+      <section id="file-section" class="mode-file">
+        <!-- File drop zone -->
+        <div id="file-drop" class="only-file empty">
+
+          <!-- No file loaded -->
+          <div id="no-file">
+            <span>Drag and drop file</span>
+            <span>or</span>
+            <button id="file-browse" class="main">Select file...</button>
+            <span id="file-limit">Max file size of 100MB</span>
+          </div>
+
+          <!-- Loading file -->
+          <div id="loading-file">
+            <div id="loader"></div>
+          </div>
+
+          <!-- File loaded -->
+          <div id="found-file">
+            <span id="file-name">test.dpl</span>
+            <button id="file-remove" class="red">Remove</button>
+          </div>
+
+        </div>
+        <input id="file" type="file" style="display:none">
+
+        <!-- Message mode area -->
+        <textarea id="data" tabindex="0" class="nodisable only-text" placeholder="Message" autocomplete="off"></textarea>
+        <span id="file-mode" tabindex="0">or change to <span class="only-file">text</span><span class="only-text">file</span> mode</span>
+      </section>
+
+      <!-- Inputs -->
+      <input type="password" name="password" id="password" tabindex="0" class="nodisable" placeholder="Password" autocomplete="off"><br><br>
+      <input type="password" name="confirm-password" id="confirm-password" tabindex="0" class="nodisable" placeholder="Confirm Password" autocomplete="off">
+
+      <!-- Password strength bar -->
+      <div id="strengthbar" class="none">
+        <div></div>
+      </div>
+
+      <!-- Password strength list -->
+      <div id="password-requirements" class="minimize">
+        <p id="password-requirements-length" class="fail">At least 8 characters long</p>
+        <p id="password-requirements-lowercase" class="fail">Contains lowercase letters</p>
+        <p id="password-requirements-uppercase" class="fail">Contains uppercase letters</p>
+        <p id="password-requirements-number" class="fail">Contains numbers</p>
+        <p id="password-requirements-symbol" class="fail">Contains symbols</p>
+      </div>
+
+      <!-- Menu bar -->
+      <div id="main-bar" class="bar">
+        <button id="copy" class="flex main" disabled tabindex="0">Encrypt</button>
+        <button id="return" class="red" tabindex="0"><img src="image/menu.svg" alt="Menu"></button>
+      </div>
+
+      <!-- Weak password warning bar -->
+      <div id="password-bar" class="hide">
+        <!-- Message -->
+        <div class="warning">
+          <p>Weak passwords are easier to guess and could make your message vulnerable to attackers. We recommend securing your message with a stronger password.</p>
+          <p>Would you like to proceed anyway?</p>
+        </div>
+
+        <!-- Options -->
+        <div class="bar">
+          <button id="cancel" class="red flex" tabindex="0">Cancel</button>
+          <button id="continue" class="nocolor nowrap" tabindex="0">Proceed</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Output screen -->
+    <section id="screen-output" class="hide">
+      <!-- Success icon -->
+      <div id="icon">
+        <img src="image/locked.png" alt="Locked">
+      </div>
+
+      <!-- Header & text -->
+      <h2>Your <span class="message-only">message</span><span class="file-only">file</span> has been encrypted!</h2>
+      <p>Press the <i>Save</i> button below to save the encrypted file.</p>
+      <p>To decrypt this <span class="message-only">message</span><span class="file-only">file</span> later, you can load the encrypted file into this browser extension and unlock it using the password that you just set.</p>
+
+      <!-- Donation banner -->
+      <div id="donationpopup" class="hide">
+        <p>Data Padlock is a free browser extension supported solely by the support of users like you. Please consider making a donation.</p>
+        <button id="donate">Donate</button>
+      </div>
+
+      <!-- Menu bar -->
+      <div class="bar">
+        <button id="share-download" class="green flex" tabindex="0"><img src="image/download.svg"> Save</button>
+        <button id="share-new" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> Menu</button>
+      </div>
+
+      <!-- Save file warning -->
+      <div class="warning">
+        You cannot view this encrypted file again, once you navigate away from this page.
+      </div>
+    </section>
+
+    <!-- Loading wheel -->
+    <section id="loading-screen">
+      <div id="loader"></div>
+    </section>
+
+  </div>
+  <script src="script/config.js"></script>
+  <script src="script/navigation.js"></script>
+  <script src="script/general.js"></script>
+  <script src="script/file.js"></script>
+  <script src="script/encrypt.js"></script>
+</body>
+
+</html>

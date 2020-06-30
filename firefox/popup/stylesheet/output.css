@@ -1,0 +1,55 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/* Lock icon */
+#icon {
+  background: var(--green-light) linear-gradient(to bottom right, var(--green-light), var(--green-dark));
+  border-radius: 100%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 4%;
+  width: 20%;
+}
+
+#icon img {
+  width: 100%;
+}
+/* Lock icon - end */
+
+/* Heading */
+#screen-output h2 {
+  color: var(--green-light);
+  text-align: center;
+}
+/* Heading - end */
+
+/* Hidden elements */
+#screen-output.file .message-only,
+#screen-output.message .file-only,
+#screen-output.file #unlocked-message {
+  display: none !important;
+}
+/* Hidden elements - end */
+
+/* Donation popup */
+#donationpopup {
+  background: var(--blue-pale);
+  border-left: 5px solid var(--blue-dark);
+  color: var(--blue-dark);
+  margin: 10px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+
+#donationpopup p {
+  flex: 1;
+}
+
+#donationpopup button {
+  background: var(--blue-dark) linear-gradient(var(--blue-light), var(--blue-dark));
+  color: white;
+  height: max-content;
+}
+/* Donation popup - end */
