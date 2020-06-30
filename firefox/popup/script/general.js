@@ -73,7 +73,7 @@ function setScreen(screen) {
 function showDonationLink() {
     const random = Math.floor((Math.random() * 3) + 1);
 
-    if (random == 1 || true) {
+    if (random == 1) {
         document.getElementById('donationpopup').className = '';
         document.getElementById('donate').addEventListener('click', () => { window.open('https://www.paypal.me/wbrantonaddons', '_blank') });
     }
