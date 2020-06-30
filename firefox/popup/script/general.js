@@ -79,6 +79,10 @@ function showDonationLink() {
     }
 }
 
+/**
+ * Check if user agreed to ToS & PP
+ * @param {string} mode 
+ */
 async function checkToS(mode) {
     const { tos } = await browser.storage.local.get();
     const tosVersion = 1;
