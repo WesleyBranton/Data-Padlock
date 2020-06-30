@@ -1,11 +1,13 @@
 # Data Padlock [<img align="right" src=".github/fxaddon.png">](https://addons.mozilla.org/firefox/addon/data-padlock/)
-Any personal information sent over the internet is vulnerable to security threats like wiretapping. Thankfully, encryption exists to help protect data transmitted over the internet. Encryption is a process used to convert plain text into data that cannot be understood by anyone else but the intended receiver.
+Data Padlock is a browser-based encryption add-on that allows users to preserve their privacy and security by encrypting files and messages with a password. The add-on uses the Advanced Encryption Standard (the same standard used by the US government), which provides a high level of security.
 
-Data Padlock uses the Advanced Encryption Standard (AES) to locally encrypt your files or messages until the receiver enters the configured password. AES encryption provides a high level of security, so much so that it is used by the US government!
+This powerful add-on can be used for a variety of purposes, like sharing messages or files over an unencrypted network or securing files you store in the cloud.
 
-Data Padlock is simple to use. Simply attach your file or enter your text into the add-on, assign a password and the encrypted file will be saved so you can use it on your instant messaging service or email client. When the receiver gets the file, they simply attach the file to the Data Padlock add-on and enter the password.
+The process is simple! Just add select the file or type the message that you want to encrypt, enter a strong password and Data Padlock will generate an encrypted file that can be shared or saved. To access the file or message later, just select the encrypted file and enter the password to unlock it. It's that easy!
 
-Keep your private files and messages private with Data Padlock!
+The encryption is performed entirely using the browser's built-in cryptography libraries, so your information isn't sent over the internet and no one involved with the Data Padlock project can see what you're encrypting.
+
+Maintain your privacy with Data Padlock!
 
 ## Development
 This repository contains all of the required source code files to make changes to this extension. The "master" branch contains the source code for the latest stable release. If you want to test that version, you can view the release section to download the XPI file or visit the add-on listing on Mozilla.
