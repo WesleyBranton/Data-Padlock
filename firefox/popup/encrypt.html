@@ -6,7 +6,7 @@
 <html>
 
 <head>
-  <title>Encrypt Data</title>
+  <title data-i18n="actionEncryptData"></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
@@ -18,14 +18,14 @@
 </head>
 
 <body>
-  <div id="banner" class="error hidden">ERROR!</div>
+  <div id="banner" class="error hidden"></div>
 
   <div id="container">
 
     <!-- Header -->
     <header>
-      <img src="../icons/icon-64.png" alt="dp">
-      <h1>Data Padlock</h1>
+      <img src="../icons/icon-64.png" alt="">
+      <h1 data-i18n="extensionName"></h1>
     </header>
 
     <!-- Input screen -->
@@ -36,10 +36,10 @@
 
           <!-- No file loaded -->
           <div id="no-file">
-            <span>Drag and drop file</span>
-            <span>or</span>
-            <button id="file-browse" class="main">Select file...</button>
-            <span id="file-limit">Max file size of 100MB</span>
+            <span data-i18n="fileDragText"></span>
+            <span data-i18n="or"></span>
+            <button id="file-browse" class="main" data-i18n="fileSelectFile"></button>
+            <span id="file-limit" data-i18n="fileSizeLimit"></span>
           </div>
 
           <!-- Loading file -->
@@ -49,8 +49,8 @@
 
           <!-- File loaded -->
           <div id="found-file">
-            <span id="file-name">test.dpl</span>
-            <button id="file-remove" class="red">Remove</button>
+            <span id="file-name"></span>
+            <button id="file-remove" class="red" data-i18n="fileRemove"></button>
           </div>
 
         </div>
@@ -58,7 +58,10 @@
 
         <!-- Message mode area -->
         <textarea id="data" tabindex="0" class="nodisable only-text" placeholder="Message" autocomplete="off"></textarea>
-        <span id="file-mode" tabindex="0">or change to <span class="only-file">text</span><span class="only-text">file</span> mode</span>
+        <span id="file-mode" tabindex="0">
+          <span class="only-file" data-i18n="actionChangeToTextMode"></span>
+          <span class="only-text" data-i18n="actionChangeToFileMode"></span>
+        </span>
       </section>
 
       <!-- Inputs -->
@@ -72,16 +75,16 @@
 
       <!-- Password strength list -->
       <div id="password-requirements" class="minimize">
-        <p id="password-requirements-length" class="fail">At least 8 characters long</p>
-        <p id="password-requirements-lowercase" class="fail">Contains lowercase letters</p>
-        <p id="password-requirements-uppercase" class="fail">Contains uppercase letters</p>
-        <p id="password-requirements-number" class="fail">Contains numbers</p>
-        <p id="password-requirements-symbol" class="fail">Contains symbols</p>
+        <p id="password-requirements-length" class="fail" data-i18n="passwordRequirementsLength"></p>
+        <p id="password-requirements-lowercase" class="fail" data-i18n="passwordRequirementsLowercase"></p>
+        <p id="password-requirements-uppercase" class="fail" data-i18n="passwordRequirementsUppercase"></p>
+        <p id="password-requirements-number" class="fail" data-i18n="passwordRequirementsNumber"></p>
+        <p id="password-requirements-symbol" class="fail" data-i18n="passwordRequirementsSymbol"></p>
       </div>
 
       <!-- Menu bar -->
       <div id="main-bar" class="bar">
-        <button id="copy" class="flex main" disabled tabindex="0">Encrypt</button>
+        <button id="copy" class="flex main" disabled tabindex="0" data-i18n="actionEncrypt"></button>
         <button id="return" class="red" tabindex="0"><img src="image/menu.svg" alt="Menu"></button>
       </div>
 
@@ -89,14 +92,14 @@
       <div id="password-bar" class="hide">
         <!-- Message -->
         <div class="warning">
-          <p>Weak passwords are easier to guess and could make your message vulnerable to attackers. We recommend securing your message with a stronger password.</p>
-          <p>Would you like to proceed anyway?</p>
+          <p data-i18n="warningWeakPassword"></p>
+          <p data-i18n="warningProceed"></p>
         </div>
 
         <!-- Options -->
         <div class="bar">
-          <button id="cancel" class="red flex" tabindex="0">Cancel</button>
-          <button id="continue" class="nocolor nowrap" tabindex="0">Proceed</button>
+          <button id="cancel" class="red flex" tabindex="0" data-i18n="actionCancel"></button>
+          <button id="continue" class="nocolor nowrap" tabindex="0" data-i18n="actionProceed"></button>
         </div>
       </div>
     </section>
@@ -109,26 +112,30 @@
       </div>
 
       <!-- Header & text -->
-      <h2>Your <span class="message-only">message</span><span class="file-only">file</span> has been encrypted!</h2>
-      <p>Press the <i>Save</i> button below to save the encrypted file.</p>
-      <p>To decrypt this <span class="message-only">message</span><span class="file-only">file</span> later, you can load the encrypted file into this browser extension and unlock it using the password that you just set.</p>
+      <h2>
+        <span class="message-only" data-i18n="encryptSuccessText"></span>
+        <span class="file-only" data-i18n="encryptSuccessFile"></span>
+      </h2>
+      <p data-i18n="encryptSave" data-i18n-placeholders="actionSave"></p>
+      <p>
+        <span class="message-only" data-i18n="encryptHowToDecryptText"></span>
+        <span class="file-only" data-i18n="encryptHowToDecryptFile"></span>
+      </p>
 
       <!-- Donation banner -->
       <div id="donationpopup" class="hide">
-        <p>Data Padlock is a free browser extension supported solely by the support of users like you. Please consider making a donation.</p>
-        <button id="donate">Donate</button>
+        <p data-i18n="donateText"></p>
+        <button id="donate" data-i18n="donateButton"></button>
       </div>
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="share-download" class="green flex" tabindex="0"><img src="image/download.svg"> Save</button>
-        <button id="share-new" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> Menu</button>
+        <button id="share-download" class="green flex" tabindex="0"><img src="image/download.svg"> <span data-i18n="actionSave"></span></button>
+        <button id="share-new" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> <span data-i18n="titleMenu"></span></button>
       </div>
 
       <!-- Save file warning -->
-      <div class="warning">
-        You cannot view this encrypted file again, once you navigate away from this page.
-      </div>
+      <div class="warning" data-i18n="warningSaveFile"></div>
     </section>
 
     <!-- Loading wheel -->
@@ -137,6 +144,7 @@
     </section>
 
   </div>
+  <script src="../lib/i18n_helper.js"></script>
   <script src="script/config.js"></script>
   <script src="script/navigation.js"></script>
   <script src="script/general.js"></script>

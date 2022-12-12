@@ -12,8 +12,8 @@ pageLoad();
 function pageLoad() {
     const version = getParameterByName('v');
 
-    if (!isNaN(version) && version != null) document.getElementById('versionnumber').textContent = 'Version ' + version;
-    else document.getElementById('versionnumber').textContent = 'a different version';
+    if (!isNaN(version) && version != null) document.getElementById('versionnumber').textContent = version;
+    else document.getElementById('versionnumber').textContent = '???';
     document.getElementById('loading-screen').className = 'hide';
     document.getElementById('user-input').className = '';
 }

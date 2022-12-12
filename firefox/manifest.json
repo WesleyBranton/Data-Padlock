@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
-    "name": "Data Padlock",
+    "name": "__MSG_extensionName__",
     "version": "3.0.0",
-    "description": "Secure your files & messages using encryption!",
+    "description": "__MSG_extensionDescription__",
     "author": "Wesley Branton",
+    "default_locale": "en",
 
     "developer": {
         "name": "Wesley Branton",
@@ -20,7 +21,7 @@
 
     "browser_action": {
         "default_icon": "icons/icon-96.png",
-        "default_title": "Data Padlock"
+        "default_title": "__MSG_extensionName__"
     },
 
     "background": {

@@ -6,7 +6,7 @@
 <html>
 
 <head>
-  <title>Decrypt Data</title>
+  <title data-i18n="actionDecryptData"></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
@@ -17,14 +17,14 @@
 </head>
 
 <body>
-  <div id="banner" class="error hidden">ERROR!</div>
+  <div id="banner" class="error hidden"></div>
 
   <div id="container">
 
     <!-- Header -->
     <header>
       <img src="../icons/icon-64.png" alt="dp">
-      <h1>Data Padlock</h1>
+      <h1 data-i18n="extensionName"></h1>
     </header>
 
     <!-- Input screen -->
@@ -35,9 +35,9 @@
 
           <!-- No file loaded -->
           <div id="no-file">
-            <span>Drag and drop file</span>
-            <span>or</span>
-            <button id="file-browse" class="main">Select file...</button>
+            <span data-i18n="fileDragText"></span>
+            <span data-i18n="or"></span>
+            <button id="file-browse" class="main" data-i18n="fileSelectFile"></button>
           </div>
 
           <!-- Loading file -->
@@ -47,8 +47,8 @@
 
           <!-- File loaded -->
           <div id="found-file">
-            <span id="file-name">test.dpl</span>
-            <button id="file-remove" class="red">Remove</button>
+            <span id="file-name"></span>
+            <button id="file-remove" class="red" data-i18n="fileRemove"></button>
           </div>
 
         </div>
@@ -60,7 +60,7 @@
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="load" class="main flex" disabled>Decrypt</button>
+        <button id="load" class="main flex" disabled data-i18n="actionDecrypt"></button>
         <button id="return" class="red"><img src="image/menu.svg" alt="Menu"></button>
       </div>
     </section>
@@ -73,29 +73,33 @@
       </div>
 
       <!-- Header -->
-      <h2>Your <span class="message-only">message</span><span class="file-only">file</span> has been decrypted!</h2>
+      <h2>
+        <span class="message-only" data-i18n="decryptSuccessText"></span>
+        <span class="file-only" data-i18n="decryptSuccessFile"></span>
+      </h2>
 
       <!-- Donation banner -->
       <div id="donationpopup" class="hide">
-        <p>Data Padlock is a free browser extension supported solely by the support of users like you. Please consider making a donation.</p>
-        <button id="donate">Donate</button>
+        <p data-i18n="donateText"></p>
+        <button id="donate" data-i18n="donateButton"></button>
       </div>
 
       <!-- Message display area -->
       <textarea id="unlocked-message" readonly autocomplete="off"></textarea>
 
       <!-- Timestamp -->
-      <p><b>Encrypted on:</b> <span id="encryption-time">UNKNOWN</span></p>
+      <p><b data-i18n="encryptionDate"></b> <span id="encryption-time">???</span></p>
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="share-download" class="green flex"><img src="image/download.svg"> Save</button>
-        <button id="read-new" class="main flex nowrap" tabindex="-1"><img src="image/menu.svg"> Menu</button>
+        <button id="share-download" class="green flex"><img src="image/download.svg"> <span data-i18n="actionSave"></span></button>
+        <button id="read-new" class="main flex nowrap" tabindex="-1"><img src="image/menu.svg"> <span data-i18n="titleMenu"></span></button>
       </div>
 
       <!-- Save file warning -->
       <div class="note">
-        Pressing the <i>Save</i> button will save the decrypted <span class="message-only">message</span><span class="file-only">file</span> to your device.
+        <span class="message-only" data-i18n="decryptSaveWarningText" data-i18n-placeholders="actionSave"></span>
+        <span class="file-only" data-i18n="decryptSaveWarningFile" data-i18n-placeholders="actionSave"></span>
       </div>
     </section>
 
@@ -105,6 +109,7 @@
     </section>
 
   </div>
+  <script src="../lib/i18n_helper.js"></script>
   <script src="script/config.js"></script>
   <script src="script/navigation.js"></script>
   <script src="script/general.js"></script>

@@ -35,7 +35,7 @@ function fileDropped(event) {
 
     if (event.dataTransfer.items && UI.file.input.value == '') {
         if (event.dataTransfer.items.length > 1) {
-            createError('Can only use 1 file at a time');
+            createError(browser.i18n.getMessage('errorMultipleFiles'));
         } else {
             if (event.dataTransfer.items[0].kind == 'file') {
                 UI.file.input.files = event.dataTransfer.files;
@@ -119,8 +119,8 @@ async function loadFile() {
 
     // Check if the file type is valid
     if (!validFileType()) {
-        if (encryption) createError('This file has already been encrypted!');
-        else createError('File must be a .DPL file!');
+        if (encryption) createError(browser.i18n.getMessage('errorFileAlreadyEncrypted'));
+        else createError(browser.i18n.getMessage('errorFileNotDPL'));
         return unloadFile();
     }
 
@@ -130,7 +130,7 @@ async function loadFile() {
 
     // Enforce file size limit of 100MB (for encryption only)
     if (encryption && file.size > 100000000) {
-        createError('File cannot be larger than 100MB!');
+        createError(browser.i18n.getMessage('errorFileTooLarge'));
         return unloadFile();
     }
 

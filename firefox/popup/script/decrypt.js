@@ -160,7 +160,7 @@ async function decrypt() {
  */
 function wrongPassword() {
     UI.field.password.value = '';
-    createError('Incorrect password!');
+    createError(browser.i18n.getMessage('errorWrongPassword'));
     setScreen(UI.screen.input);
 }
 
@@ -193,7 +193,7 @@ function verify() {
  */
 function validFlag(flag) {
     if (flag.indexOf(config.flag.short) != 0) {
-        createError('Invalid file detected!');
+        createError(browser.i18n.getMessage('errorInvalidFile'));
         return false;
     }
 

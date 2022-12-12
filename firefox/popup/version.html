@@ -6,7 +6,7 @@
 <html>
 
 <head>
-  <title>Incorrect Version</title>
+  <title data-i18n="versionTitle"></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
@@ -20,24 +20,24 @@
     <!-- Header -->
     <header>
       <img src="../icons/icon-64.png" alt="dp">
-      <h1>Data Padlock</h1>
+      <h1 data-i18n="extensionName"></h1>
     </header>
 
     <!-- Main screen -->
     <section id="screen-input">
-      <h1>Wrong Version Detected!</h1>
-      <p>The file you are attempting to decrypt was created using <b><span id="versionnumber"></span></b> of the Data Padlock extension and, therefore, cannot be opened using this version.</p>
-      <p>To decrypt this file, you will need to download the correct version of Data Padlock. <a href="https://github.com/WesleyBranton/Data-Padlock/wiki/Decrypting-content-from-an-older-version" target="_blank">Click here for more information.</a></p>
+      <h1 data-i18n="versionTitle"></h1>
+      <p><span data-i18n="versionExplain1"></span> <b><span id="versionnumber"></span></b> <span data-i18n="versionExplain2" data-i18n-placeholders="extensionName"></span></p>
+      <p><span data-i18n="versionExplain3" data-i18n-placeholders="extensionName"></span> <a href="https://github.com/WesleyBranton/Data-Padlock/wiki/Decrypting-content-from-an-older-version" target="_blank" data-i18n="versionMoreInformation"></a></p>
 
       <!-- Warning notice -->
       <div class="note">
-        Older versions of Data Padlock should only be used to decrypt data. <b>New data should never be encrypted using an old version.</b>
+        <span data-i18n="versionWarningDecryptOnly" data-i18n-placeholders="extensionName"></span> <b data-i18n="versionWarningNoEncrypt"></b>
       </div>
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="view" class="main flex"><img src="image/download.svg"> Download Old Version</button>
-        <button id="cancel" class="nocolor nowrap"><img src="image/close.svg"> Cancel</button>
+        <button id="view" class="main flex"><img src="image/download.svg"> <span data-i18n="actionDownloadOld"></span></button>
+        <button id="cancel" class="nocolor nowrap"><img src="image/close.svg"> <span data-i18n="actionCancel"></span></button>
       </div>
     </section>
 
@@ -47,6 +47,7 @@
     </section>
 
   </div>
+  <script src="../lib/i18n_helper.js"></script>
   <script src="script/navigation.js"></script>
   <script src="script/version.js"></script>
 </body>
