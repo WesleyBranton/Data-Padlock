@@ -6,7 +6,7 @@
 <html>
 
 <head>
-  <title>End-User License Agreement</title>
+  <title data-i18n="actionEULA"></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
@@ -19,35 +19,38 @@
 
     <!-- Header -->
     <header>
-      <img src="../icons/icon-64.png" alt="dp">
-      <h1>Data Padlock</h1>
+      <img src="../icons/icon-64.png" alt="">
+      <h1 data-i18n="extensionName"></h1>
     </header>
 
     <!-- Main screen -->
     <section id="screen-input" class="hide">
-      <h1>End-User License Agreement</h1>
-      <p>Before you can use this browser extension, you must review the associated End-User License Agreement and Privacy Policy:</p>
-      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/eula/" target="_blank" tabindex="0">Click here to read the End-User License Agreement</a></p>
-      <label><input id="eula-checkbox" type="checkbox" class="error" tabindex="0"> I have read and agree to the End-User License Agreement</label>
-      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/privacy/" target="_blank" tabindex="0">Click here to read the Privacy Policy</a></p>
-      <label><input id="pp-checkbox" type="checkbox" class="error" tabindex="0"> I have read and agree to the Privacy Policy</label>
+      <h1 data-i18n="actionEULA"></h1>
+      <p data-i18n="termsIntro"></p>
+      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/eula/" target="_blank" tabindex="0" data-i18n="termsEULALink"></a></p>
+      <input id="eula-checkbox" type="checkbox" class="error" tabindex="0">
+      <label for="eula-checkbox" data-i18n="termsEULACheckbox"></label>
+      <br>
+      <p><a href="https://addons.mozilla.org/firefox/addon/data-padlock/privacy/" target="_blank" tabindex="0" data-i18n="termsPrivacyLink"></a></p>
+      <input id="pp-checkbox" type="checkbox" class="error" tabindex="0">
+      <label for="pp-checkbox" data-i18n="termsPrivacyCheckbox"></label>
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="agree" class="main flex" disabled tabindex="0">I agree</button>
-        <button id="cancel" class="nocolor nowrap" tabindex="0">Cancel</button>
+        <button id="agree" class="main flex" disabled tabindex="0" data-i18n="actionAgree"></button>
+        <button id="cancel" class="nocolor nowrap" tabindex="0" data-i18n="actionCancel"></button>
       </div>
     </section>
 
     <!-- Failed to agree screen -->
     <section id="screen-output" class="hide">
-      <h1>Please, uninstall this browser extension</h1>
-      <p>To use this browser extension, all users must agree to the End-User License Agreement and Privacy Policy.</p>
-      <p>If you do not agree with either of these documents, please uninstall this browser extension from Firefox. <a href="https://support.mozilla.org/kb/disable-or-remove-add-ons" target="_blank">Click here to find out how.</a></p>
+      <h1 data-i18n="termsFailHeader"></h1>
+      <p data-i18n="termsFailText1"></p>
+      <p><span data-i18n="termsFailText2"></span> <a href="https://support.mozilla.org/kb/disable-or-remove-add-ons" target="_blank" data-i18n="termsFailLink"></a></p>
 
       <!-- Menu bar -->
       <div class="bar">
-        <button id="menu" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> Menu</button>
+        <button id="menu" class="main flex nowrap" tabindex="0"><img src="image/menu.svg"> <span data-i18n="titleMenu"></span></button>
       </div>
     </section>
 
@@ -57,6 +60,7 @@
     </section>
 
   </div>
+  <script src="../lib/i18n_helper.js"></script>
   <script src="script/navigation.js"></script>
   <script src="script/general.js"></script>
   <script src="script/tos.js"></script>

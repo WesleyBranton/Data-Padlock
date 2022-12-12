@@ -6,7 +6,7 @@
 <html>
 
 <head>
-  <title>Menu</title>
+  <title data-i18n="titleMenu"></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheet/theme.css">
@@ -19,18 +19,18 @@
 
     <!-- Header -->
     <header>
-      <img src="../icons/icon-64.png" alt="dp">
-      <h1>Data Padlock</h1>
+      <img src="../icons/icon-64.png" alt="">
+      <h1 data-i18n="extensionName"></h1>
     </header>
 
     <!-- Menu buttons -->
     <section id="menu-buttons">
-      <button id="lock" class="menu-btn big main" tabindex="0">Encrypt Data</button>
-      <button id="unlock" class="menu-btn big main" tabindex="0">Decrypt Data</button>
-      <button id="wiki" class="second-item nocolor nowrap space" tabindex="0">Wiki</button>
-      <button id="release" class="second-item nocolor nowrap" tabindex="0">Release Notes</button>
-      <button id="terms" class="second-item nocolor nowrap" tabindex="0">End-User License Agreement</button>
-      <button id="privacy" class="second-item nocolor nowrap" tabindex="0">Privacy Policy</button>
+      <button id="lock" class="menu-btn big main" tabindex="0" data-i18n="actionEncryptData"></button>
+      <button id="unlock" class="menu-btn big main" tabindex="0" data-i18n="actionDecryptData"></button>
+      <button id="wiki" class="second-item nocolor nowrap space" tabindex="0" data-i18n="actionHelp"></button>
+      <button id="release" class="second-item nocolor nowrap" tabindex="0" data-i18n="actionReleaseNotes"></button>
+      <button id="terms" class="second-item nocolor nowrap" tabindex="0" data-i18n="actionEULA"></button>
+      <button id="privacy" class="second-item nocolor nowrap" tabindex="0" data-i18n="actionPrivacyPolicy"></button>
     </section>
 
     <!-- Loading wheel -->
@@ -39,6 +39,7 @@
     </section>
 
   </div>
+  <script src="../lib/i18n_helper.js"></script>
   <script src="script/menu.js"></script>
   <script src="script/navigation.js"></script>
 </body>

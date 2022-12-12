@@ -1,0 +1,238 @@
+{
+    "extensionName": {
+        "message": "Data Padlock"
+    },
+    "extensionDescription": {
+        "message": "Secure your files & messages using encryption!"
+    },
+
+    "titleMenu": {
+        "message": "Menu"
+    },
+
+    "actionEncryptData": {
+        "message": "Encrypt Data"
+    },
+    "actionDecryptData": {
+        "message": "Decrypt Data"
+    },
+    "actionHelp": {
+        "message": "Wiki"
+    },
+    "actionReleaseNotes": {
+        "message": "Release Notes"
+    },
+    "actionEULA": {
+        "message": "End-User License Agreement"
+    },
+    "actionPrivacyPolicy": {
+        "message": "Privacy Policy"
+    },
+    "actionAgree": {
+        "message": "I agree"
+    },
+    "actionCancel": {
+        "message": "Cancel"
+    },
+    "actionSave": {
+        "message": "Save"
+    },
+    "actionEncrypt": {
+        "message": "Encrypt"
+    },
+    "actionProceed": {
+        "message": "Proceed"
+    },
+    "actionChangeToTextMode": {
+        "message": "or change to text mode"
+    },
+    "actionChangeToFileMode": {
+        "message": "or change to file mode"
+    },
+    "actionDecrypt": {
+        "message": "Decrypt"
+    },
+    "actionDownloadOld": {
+        "message": "Download Old Version"
+    },
+
+    "termsIntro": {
+        "message": "Before you can use this browser extension, you must review the associated End-User License Agreement and Privacy Policy:"
+    },
+    "termsEULALink": {
+        "message": "Click here to read the End-User License Agreement"
+    },
+    "termsEULACheckbox": {
+        "message": "I have read and agree to the End-User License Agreement"
+    },
+    "termsPrivacyLink": {
+        "message": "Click here to read the Privacy Policy"
+    },
+    "termsPrivacyCheckbox": {
+        "message": "I have read and agree to the Privacy Policy"
+    },
+    "termsFailHeader": {
+        "message": "Please, uninstall this browser extension"
+    },
+    "termsFailText1": {
+        "message": "To use this browser extension, all users must agree to the End-User License Agreement and Privacy Policy."
+    },
+    "termsFailText2": {
+        "message": "If you do not agree with either of these documents, please uninstall this browser extension from Firefox."
+    },
+    "termsFailLink": {
+        "message": "Click here to find out how."
+    },
+
+    "fileDragText": {
+        "message": "Drag and drop file"
+    },
+    "or": {
+        "message": "or"
+    },
+    "fileSelectFile": {
+        "message": "Select file..."
+    },
+    "fileSizeLimit": {
+        "message": "Max file size of 100MB"
+    },
+    "fileRemove": {
+        "message": "Remove"
+    },
+
+    "passwordRequirementsLength": {
+        "message": "At least 8 characters long"
+    },
+    "passwordRequirementsLowercase": {
+        "message": "Contains lowercase letters"
+    },
+    "passwordRequirementsUppercase": {
+        "message": "Contains uppercase letters"
+    },
+    "passwordRequirementsNumber": {
+        "message": "Contains numbers"
+    },
+    "passwordRequirementsSymbol": {
+        "message": "Contains symbols"
+    },
+
+    "warningWeakPassword": {
+        "message": "Weak passwords are easier to guess and could make your message vulnerable to attackers. We recommend securing your message with a stronger password."
+    },
+    "warningProceed": {
+        "message": "Would you like to proceed anyway?"
+    },
+    "warningSaveFile": {
+        "message": "You cannot view this encrypted file again, once you navigate away from this page."
+    },
+
+    "donateText": {
+        "message": "Data Padlock is a free browser extension supported solely by the support of users like you. Please consider making a donation."
+    },
+    "donateButton": {
+        "message": "Donate"
+    },
+
+    "encryptSuccessText": {
+        "message": "Your message has been encrypted!"
+    },
+    "encryptSuccessFile": {
+        "message": "Your file has been encrypted!"
+    },
+    "encryptSave": {
+        "message": "Press the '$BUTTON$' button below to save the encrypted file.",
+        "placeholders": {
+            "button": {
+                "content": "$1"
+            }
+        }
+    },
+    "encryptHowToDecryptText": {
+        "message": "To decrypt this message later, you can load the encrypted file into this browser extension and unlock it using the password that you just set."
+    },
+    "encryptHowToDecryptFile": {
+        "message": "To decrypt this file later, you can load the encrypted file into this browser extension and unlock it using the password that you just set."
+    },
+    "encryptionDate": {
+        "message": "Encrypted on:"
+    },
+
+    "decryptSuccessText": {
+        "message": "Your message has been decrypted!"
+    },
+    "decryptSuccessFile": {
+        "message": "Your file has been decrypted!"
+    },
+    "decryptSaveWarningText": {
+        "message": "Pressing the '$BUTTON$' will save the decrypted message to your device.",
+        "placeholders": {
+            "button": {
+                "content": "$1"
+            }
+        }
+    },
+    "decryptSaveWarningFile": {
+        "message": "Pressing the '$BUTTON$' will save the decrypted file to your device.",
+        "placeholders": {
+            "button": {
+                "content": "$1"
+            }
+        }
+    },
+
+    "errorWrongPassword": {
+        "message": "Incorrect password!"
+    },
+    "errorInvalidFile": {
+        "message": "Invalid file detected!"
+    },
+    "errorMultipleFiles": {
+        "message": "Can only use 1 file at a time"
+    },
+    "errorFileAlreadyEncrypted": {
+        "message": "This file has already been encrypted!"
+    },
+    "errorFileNotDPL": {
+        "message": "File must be a .DPL file!"
+    },
+    "errorFileTooLarge": {
+        "message": "File cannot be larger than 100MB!"
+    },
+
+    "versionTitle": {
+        "message": "Wrong Version Detected!"
+    },
+    "versionExplain1": {
+        "message": "The file you are attempting to decrypt was created using"
+    },
+    "versionExplain2": {
+        "message": "of the $EXTENSIONNAME$ extension and, therefore, cannot be opened using this version.",
+        "placeholders": {
+            "extensionname": {
+                "content": "$1"
+            }
+        }
+    },
+    "versionExplain3": {
+        "message": "To decrypt this file, you will need to download the correct version of $EXTENSIONNAME$.",
+        "placeholders": {
+            "extensionname": {
+                "content": "$1"
+            }
+        }
+    },
+    "versionMoreInformation": {
+        "message": "Click here for more information."
+    },
+    "versionWarningDecryptOnly": {
+        "message": "Older versions of $EXTENSIONNAME$ should only be used to decrypt data.",
+        "placeholders": {
+            "extensionname": {
+                "content": "$1"
+            }
+        }
+    },
+    "versionWarningNoEncrypt": {
+        "message": "New data should never be encrypted using an old version."
+    }
+}
