@@ -3,6 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 // Create variables
+const webBase = 'https://addons.wesleybranton.com/addon/data-padlock';
 let isAndroid;
 
 // Register event listeners
@@ -12,6 +13,7 @@ browser.runtime.onInstalled.addListener(installHandler);
 
 // Run extension load scripts
 detectOS();
+setUninstallPage();
 
 /**
  * Open a new window
@@ -71,10 +73,42 @@ function messageHandler(message, sender) {
 
 function installHandler(details) {
     if (details.reason == 'install') {
-        browser.tabs.create({ url: 'https://wesleybranton.github.io/Data-Padlock/welcome?v=3.0' });
+        browser.tabs.create({ url: `${webBase}/welcome?v=3.0` });
     } else if (details.reason == 'update') {
         if (parseFloat(details.previousVersion) < 3) {
-            browser.tabs.create({ url: 'https://wesleybranton.github.io/Data-Padlock/v3/rebrand' });
+            browser.tabs.create({ url: `${webBase}/update/v3_0` });
         }
     }
+}
+
+/**
+ * Set up uninstall page
+ */
+function setUninstallPage() {
+    getSystemDetails((details) => {
+        browser.runtime.setUninstallURL(`${webBase}/uninstall/?browser=${details.browser}&os=${details.os}&version=${details.version}`);
+    });
+}
+
+/**
+ * Send system details to callback
+ * @param {Function} callback
+ */
+function getSystemDetails(callback) {
+    browser.runtime.getPlatformInfo((platform) => {
+        callback({
+            browser: getBrowserName().toLowerCase(),
+            version: browser.runtime.getManifest().version,
+            os: platform.os
+        });
+    });
+}
+
+
+/**
+ * Get browser name
+ * @returns Browser name
+ */
+function getBrowserName() {
+    return 'FIREFOX';
 }
